@@ -3,6 +3,7 @@ import StoreList from "./StoreList";
 import Dashboard from "./Dashboard";
 import NotFound from "./NotFound";
 import { Route, Switch } from "react-router-dom";
+import stores from "../stores";
 
 class App extends React.Component {
   state = {
@@ -12,6 +13,11 @@ class App extends React.Component {
     const stores = { ...this.state.stores };
     stores[`store${Date.now()}`] = store;
     this.setState({ stores });
+  };
+  loadStoresFromFile = () => {
+    this.setState({
+      stores,
+    });
   };
   render() {
     return (
@@ -23,7 +29,11 @@ class App extends React.Component {
             exact
             path="/dashboard"
             render={(props) => (
-              <Dashboard {...props} addStore={this.addStore} />
+              <Dashboard
+                {...props}
+                addStore={this.addStore}
+                loadStoresFromFile={this.loadStoresFromFile}
+              />
             )}
           />
           <Route component={NotFound}></Route>

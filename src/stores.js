@@ -1,0 +1,48 @@
+const stores = {
+  store1: {
+    name: "Soundlounge",
+    address1: "75 Kerikeri Rd",
+    address2: "Kerikeri",
+    address3: "0230",
+    lat: -35.227566,
+    lng: 173.9468371,
+    phone: "(09) 407 7101",
+    urlRef: "https://www.facebook.com/pages/The-Sound-Lounge/519304244757508",
+    image: "https://via.placeholder.com/150",
+  },
+  store2: {
+    name: "Soundlounge",
+    address1: "75 Kerikeri Rd",
+    address2: "Kerikeri",
+    address3: "0230",
+    lat: -35.227566,
+    lng: 173.9468371,
+    phone: "(09) 407 7101",
+    urlRef: "https://www.facebook.com/pages/The-Sound-Lounge/519304244757508",
+    image: "https://via.placeholder.com/150",
+  },
+  store3: {
+    name: "Soundlounge",
+    address1: "75 Kerikeri Rd",
+    address2: "Kerikeri",
+    address3: "0230",
+    lat: -35.227566,
+    lng: 173.9468371,
+    phone: "(09) 407 7101",
+    urlRef: "https://www.facebook.com/pages/The-Sound-Lounge/519304244757508",
+    image: "https://via.placeholder.com/150",
+  },
+  store4: {
+    name: "Soundlounge",
+    address1: "75 Kerikeri Rd",
+    address2: "Kerikeri",
+    address3: "0230",
+    lat: -35.227566,
+    lng: 173.9468371,
+    phone: "(09) 407 7101",
+    urlRef: "https://www.facebook.com/pages/The-Sound-Lounge/519304244757508",
+    image: "https://via.placeholder.com/150",
+  },
+};
+
+export default stores;

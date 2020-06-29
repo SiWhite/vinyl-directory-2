@@ -7,6 +7,9 @@ class Dashboard extends React.Component {
       <div className="dashboard">
         <h2>Dashboard</h2>
         <AddStoreForm addStore={this.props.addStore} />
+        <button onClick={this.props.loadStoresFromFile}>
+          Load stores from file
+        </button>
       </div>
     );
   }
