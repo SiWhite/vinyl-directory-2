@@ -7,8 +7,6 @@ class Store extends React.Component {
       address1,
       address2,
       address3,
-      lat,
-      lng,
       phone,
       url,
       image,

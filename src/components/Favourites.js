@@ -1,10 +1,10 @@
 import React from "react";
 import Header from "./Header";
-import stores from "../stores";
 
 class Favourites extends React.Component {
   renderFavourite = (key) => {
     const fav = this.props.stores[key];
+    if (!fav) return null;
     return (
       <li key={key}>
         <img src={fav.image} alt={fav.name} />

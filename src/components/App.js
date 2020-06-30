@@ -5,22 +5,47 @@ import Favourites from "./Favourites";
 import NotFound from "./NotFound";
 import { Route, Switch } from "react-router-dom";
 import stores from "../stores";
+import base from "../base";
 
 class App extends React.Component {
   state = {
     stores: {},
     favourites: {},
   };
+
+  componentDidMount() {
+    const localStorageRef = localStorage.getItem("favourites");
+    if (localStorageRef) {
+      this.setState({
+        favourites: JSON.parse(localStorageRef),
+      });
+    }
+    this.ref = base.syncState(`/stores`, {
+      context: this,
+      state: "stores",
+    });
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("favourites", JSON.stringify(this.state.favourites));
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
+
   addStore = (store) => {
     const stores = { ...this.state.stores };
     stores[`store${Date.now()}`] = store;
     this.setState({ stores });
   };
+
   loadStoresFromFile = () => {
     this.setState({
       stores,
     });
   };
+
   addToFavourites = (key) => {
     const favourites = { ...this.state.favourites };
     favourites[key] = 1;
@@ -28,6 +53,7 @@ class App extends React.Component {
       favourites,
     });
   };
+
   render() {
     return (
       <main>
