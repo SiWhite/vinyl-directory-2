@@ -11,7 +11,7 @@ const stores = {
     image: "https://via.placeholder.com/150",
   },
   store2: {
-    name: "Soundlounge",
+    name: "RPM",
     address1: "75 Kerikeri Rd",
     address2: "Kerikeri",
     address3: "0230",

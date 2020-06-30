@@ -1,6 +1,7 @@
 import React from "react";
 import StoreList from "./StoreList";
 import Dashboard from "./Dashboard";
+import Favourites from "./Favourites";
 import NotFound from "./NotFound";
 import { Route, Switch } from "react-router-dom";
 import stores from "../stores";
@@ -8,6 +9,7 @@ import stores from "../stores";
 class App extends React.Component {
   state = {
     stores: {},
+    favourites: {},
   };
   addStore = (store) => {
     const stores = { ...this.state.stores };
@@ -19,6 +21,13 @@ class App extends React.Component {
       stores,
     });
   };
+  addToFavourites = (key) => {
+    const favourites = { ...this.state.favourites };
+    favourites[key] = 1;
+    this.setState({
+      favourites,
+    });
+  };
   render() {
     return (
       <main>
@@ -27,7 +36,11 @@ class App extends React.Component {
             exact
             path="/"
             render={(props) => (
-              <StoreList {...props} stores={this.state.stores} />
+              <StoreList
+                {...props}
+                stores={this.state.stores}
+                addToFavourites={this.addToFavourites}
+              />
             )}
           />
           <Route
@@ -39,6 +52,17 @@ class App extends React.Component {
                 addStore={this.addStore}
                 loadStoresFromFile={this.loadStoresFromFile}
                 stores={this.state.stores}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/favourites"
+            render={(props) => (
+              <Favourites
+                {...props}
+                stores={this.state.stores}
+                favourites={this.state.favourites}
               />
             )}
           />

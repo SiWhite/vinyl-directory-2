@@ -28,7 +28,9 @@ class Store extends React.Component {
         <br />
         <a href={url}>Visit website</a>
         <br />
-        <button>Add to favourites</button>
+        <button onClick={() => this.props.addToFavourites(this.props.index)}>
+          Add to favourites
+        </button>
       </li>
     );
   }
