@@ -23,8 +23,13 @@ class App extends React.Component {
     return (
       <main>
         <Switch>
-          <Route exact path="/" component={StoreList} />
-          {/* <Route exact path="/dashboard" component={Dashboard}></Route> */}
+          <Route
+            exact
+            path="/"
+            render={(props) => (
+              <StoreList {...props} stores={this.state.stores} />
+            )}
+          />
           <Route
             exact
             path="/dashboard"
@@ -33,6 +38,7 @@ class App extends React.Component {
                 {...props}
                 addStore={this.addStore}
                 loadStoresFromFile={this.loadStoresFromFile}
+                stores={this.state.stores}
               />
             )}
           />

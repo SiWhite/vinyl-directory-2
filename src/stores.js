@@ -7,7 +7,7 @@ const stores = {
     lat: -35.227566,
     lng: 173.9468371,
     phone: "(09) 407 7101",
-    urlRef: "https://www.facebook.com/pages/The-Sound-Lounge/519304244757508",
+    url: "https://www.facebook.com/pages/The-Sound-Lounge/519304244757508",
     image: "https://via.placeholder.com/150",
   },
   store2: {
@@ -29,7 +29,7 @@ const stores = {
     lat: -35.227566,
     lng: 173.9468371,
     phone: "(09) 407 7101",
-    urlRef: "https://www.facebook.com/pages/The-Sound-Lounge/519304244757508",
+    url: "https://www.facebook.com/pages/The-Sound-Lounge/519304244757508",
     image: "https://via.placeholder.com/150",
   },
   store4: {
@@ -40,7 +40,7 @@ const stores = {
     lat: -35.227566,
     lng: 173.9468371,
     phone: "(09) 407 7101",
-    urlRef: "https://www.facebook.com/pages/The-Sound-Lounge/519304244757508",
+    url: "https://www.facebook.com/pages/The-Sound-Lounge/519304244757508",
     image: "https://via.placeholder.com/150",
   },
 };
