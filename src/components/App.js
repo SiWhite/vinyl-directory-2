@@ -40,6 +40,18 @@ class App extends React.Component {
     this.setState({ stores });
   };
 
+  updateStore = (key, updatedStore) => {
+    const stores = { ...this.state.stores };
+    stores[key] = updatedStore;
+    this.setState({ stores });
+  };
+
+  deleteStore = (key) => {
+    const stores = { ...this.state.stores };
+    stores[key] = null;
+    this.setState({ stores });
+  };
+
   loadStoresFromFile = () => {
     this.setState({
       stores,
@@ -49,6 +61,15 @@ class App extends React.Component {
   addToFavourites = (key) => {
     const favourites = { ...this.state.favourites };
     favourites[key] = 1;
+    this.setState({
+      favourites,
+    });
+  };
+
+  deleteFavourite = (key) => {
+    console.log(key);
+    const favourites = { ...this.state.favourites };
+    delete favourites[key];
     this.setState({
       favourites,
     });
@@ -76,6 +97,8 @@ class App extends React.Component {
               <Dashboard
                 {...props}
                 addStore={this.addStore}
+                updateStore={this.updateStore}
+                deleteStore={this.deleteStore}
                 loadStoresFromFile={this.loadStoresFromFile}
                 stores={this.state.stores}
               />
@@ -89,6 +112,7 @@ class App extends React.Component {
                 {...props}
                 stores={this.state.stores}
                 favourites={this.state.favourites}
+                deleteFavourite={this.deleteFavourite}
               />
             )}
           />

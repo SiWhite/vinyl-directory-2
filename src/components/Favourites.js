@@ -6,7 +6,7 @@ class Favourites extends React.Component {
     const fav = this.props.stores[key];
     if (!fav) return null;
     return (
-      <li key={key}>
+      <li key={key} index={key}>
         <img src={fav.image} alt={fav.name} />
         <h3 className="store__name">{fav.name}</h3>
         <address>
@@ -16,9 +16,16 @@ class Favourites extends React.Component {
           <br />
           {fav.address3}
         </address>
-        <a href={`tel:${fav.phone.replace(/\s/g, "")}`}>{fav.phone}</a>
+        {/* <a href={`tel:${fav.phone.replace(/\s/g, "")}`}>{fav.phone}</a> */}
         <br />
         <a href={fav.url}>Visit website</a>
+        <button
+          onClick={() => {
+            this.props.deleteFavourite(key);
+          }}
+        >
+          Delete from favourites
+        </button>
       </li>
     );
   };
