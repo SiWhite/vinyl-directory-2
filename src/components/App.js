@@ -11,6 +11,8 @@ class App extends React.Component {
   state = {
     stores: {},
     favourites: {},
+    uid: null,
+    owner: null,
   };
 
   componentDidMount() {
@@ -101,6 +103,8 @@ class App extends React.Component {
                 deleteStore={this.deleteStore}
                 loadStoresFromFile={this.loadStoresFromFile}
                 stores={this.state.stores}
+                uid={this.state.uid}
+                owner={this.state.owner}
               />
             )}
           />
