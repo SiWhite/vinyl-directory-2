@@ -11,11 +11,12 @@ class Dashboard extends React.Component {
     uid: null,
     owner: null,
   };
-  // componentDidMount() {
-  //   firebase.auth().onAuthStateChanged((user) => {
-  //     this.authHandler({ user });
-  //   });
-  // }
+  componentDidMount() {
+    console.log("compdidmount");
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   this.authHandler({ user });
+    // });
+  }
   authHandler = async (authData) => {
     const store = await base.fetch("/", { context: this });
     if (!store.owner) {
@@ -40,9 +41,6 @@ class Dashboard extends React.Component {
     const logout = <button onClick={this.logout}>Log out</button>;
     if (!this.state.uid) {
       return <Login authenticate={this.authenticate} />;
-    }
-    if (this.state.uid !== this.state.owner) {
-      return <div>Sorry you are not the owner {logout}</div>;
     }
     return (
       <div className="dashboard">
