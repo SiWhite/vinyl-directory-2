@@ -1,11 +1,12 @@
 import React from "react";
+import firebase from "firebase";
 import StoreList from "./StoreList";
 import Dashboard from "./Dashboard";
 import Favourites from "./Favourites";
 import NotFound from "./NotFound";
 import { Route, Switch } from "react-router-dom";
 import stores from "../stores";
-import base from "../base";
+import base, { firebaseApp } from "../base";
 
 class App extends React.Component {
   state = {
@@ -25,6 +26,13 @@ class App extends React.Component {
     this.ref = base.syncState(`/stores`, {
       context: this,
       state: "stores",
+    });
+    this.ref = base.syncState(`/owner`, {
+      context: this,
+      state: "owner",
+    });
+    firebase.auth().onAuthStateChanged((user) => {
+      this.authHandler({ user });
     });
   }
 
@@ -77,6 +85,26 @@ class App extends React.Component {
     });
   };
 
+  authenticate = (provider) => {
+    const authProvider = new firebase.auth.FacebookAuthProvider();
+    firebaseApp.auth().signInWithPopup(authProvider).then(this.authHandler);
+  };
+
+  authHandler = async (authData) => {
+    const store = await base.fetch("/", { context: this });
+    if (authData.user) {
+      this.setState({
+        uid: authData.user.uid,
+        owner: store.owner,
+      });
+    }
+  };
+
+  logout = async () => {
+    await firebase.auth().signOut();
+    this.setState({ uid: null });
+  };
+
   render() {
     return (
       <main>
@@ -104,6 +132,8 @@ class App extends React.Component {
                 loadStoresFromFile={this.loadStoresFromFile}
                 stores={this.state.stores}
                 uid={this.state.uid}
+                logout={this.logout}
+                authenticate={this.authenticate}
                 owner={this.state.owner}
               />
             )}
