@@ -5,6 +5,15 @@ import EditStoreForm from "./EditStoreForm";
 import Login from "./Login";
 
 class Dashboard extends React.Component {
+  goToFavourites = (event) => {
+    this.props.history.push(`/favourites`);
+  };
+  goToMap = (event) => {
+    this.props.history.push(`/`);
+  };
+  goToList = (event) => {
+    this.props.history.push(`/list`);
+  };
   render() {
     const logout = <button onClick={this.props.logout}>Log out</button>;
     if (!this.props.uid) {
@@ -31,6 +40,9 @@ class Dashboard extends React.Component {
         <button onClick={this.props.loadStoresFromFile}>
           Load stores from file
         </button>
+        <button onClick={this.goToMap}>Go to store map</button>
+        <button onClick={this.goToList}>Go to store list</button>
+        <button onClick={this.goToFavourites}>Go to favourites</button>
       </div>
     );
   }

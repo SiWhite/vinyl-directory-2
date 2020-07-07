@@ -1,13 +1,12 @@
 import React from "react";
 import Header from "./Header";
-import Store from "./Store";
 
-class StoreList extends React.Component {
+class StoreMap extends React.Component {
   goToDashboard = (event) => {
     this.props.history.push(`/dashboard`);
   };
-  goToMap = (event) => {
-    this.props.history.push(`/`);
+  goToList = (event) => {
+    this.props.history.push(`/list`);
   };
   goToFavourites = (event) => {
     this.props.history.push(`/favourites`);
@@ -15,10 +14,10 @@ class StoreList extends React.Component {
 
   render() {
     return (
-      <div className="store-list">
+      <div className="store-map">
         <Header title="Vinyl Directory" />
-        <h2>Store List</h2>
-        <ul className="stores">
+        <h2>Store Map</h2>
+        {/* <ul className="stores">
           {Object.keys(this.props.stores).map((key) => (
             <Store
               key={key}
@@ -27,8 +26,8 @@ class StoreList extends React.Component {
               addToFavourites={this.props.addToFavourites}
             />
           ))}
-        </ul>
-        <button onClick={this.goToMap}>Go to store map</button>
+        </ul> */}
+        <button onClick={this.goToList}>Go to store list</button>
         <button onClick={this.goToDashboard}>Go to dashboard</button>
         <button onClick={this.goToFavourites}>Go to favourites</button>
       </div>
@@ -36,4 +35,4 @@ class StoreList extends React.Component {
   }
 }
 
-export default StoreList;
+export default StoreMap;

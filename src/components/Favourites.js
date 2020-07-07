@@ -2,6 +2,15 @@ import React from "react";
 import Header from "./Header";
 
 class Favourites extends React.Component {
+  goToDashboard = (event) => {
+    this.props.history.push(`/dashboard`);
+  };
+  goToMap = (event) => {
+    this.props.history.push(`/`);
+  };
+  goToList = (event) => {
+    this.props.history.push(`/list`);
+  };
   renderFavourite = (key) => {
     const fav = this.props.stores[key];
     if (!fav) return null;
@@ -36,6 +45,9 @@ class Favourites extends React.Component {
         <Header title="Vinyl Directory" />
         <h2>Favourites</h2>
         <ul className="favourites">{favIds.map(this.renderFavourite)}</ul>
+        <button onClick={this.goToMap}>Go to store map</button>
+        <button onClick={this.goToList}>Go to store list</button>
+        <button onClick={this.goToDashboard}>Go to dashboard</button>
       </div>
     );
   }

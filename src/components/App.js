@@ -1,5 +1,6 @@
 import React from "react";
 import firebase from "firebase";
+import StoreMap from "./StoreMap";
 import StoreList from "./StoreList";
 import Dashboard from "./Dashboard";
 import Favourites from "./Favourites";
@@ -112,6 +113,17 @@ class App extends React.Component {
           <Route
             exact
             path="/"
+            render={(props) => (
+              <StoreMap
+                {...props}
+                stores={this.state.stores}
+                addToFavourites={this.addToFavourites}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/list"
             render={(props) => (
               <StoreList
                 {...props}
