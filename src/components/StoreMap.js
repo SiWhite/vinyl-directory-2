@@ -1,11 +1,21 @@
 import React from "react";
 import Header from "./Header";
-import { Map, GoogleApiWrapper } from "google-maps-react";
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 
 const mapStyles = {
   width: "50%",
   height: "50%",
 };
+
+const locations = [
+  {
+    name: "Rough Peel Music",
+    location: {
+      lat: -41.2940644,
+      lng: 174.7752671,
+    },
+  },
+];
 
 class StoreMap extends React.Component {
   goToDashboard = (event) => {
@@ -28,13 +38,17 @@ class StoreMap extends React.Component {
         <button onClick={this.goToFavourites}>Go to favourites</button>
         <Map
           google={this.props.google}
-          zoom={14}
+          zoom={5}
           style={mapStyles}
           initialCenter={{
-            lat: -1.2884,
-            lng: 36.8233,
+            lat: -41.2932786,
+            lng: 174.7837615,
           }}
-        />
+        >
+          {locations.map((item) => {
+            return <Marker key={item.name} position={item.location} />;
+          })}
+        </Map>
       </div>
     );
   }
