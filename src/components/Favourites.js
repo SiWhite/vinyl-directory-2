@@ -25,7 +25,6 @@ class Favourites extends React.Component {
           <br />
           {fav.address3}
         </address>
-        {/* <a href={`tel:${fav.phone.replace(/\s/g, "")}`}>{fav.phone}</a> */}
         <br />
         <a href={fav.url}>Visit website</a>
         <button

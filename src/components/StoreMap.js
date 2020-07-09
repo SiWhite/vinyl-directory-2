@@ -1,23 +1,15 @@
 import React from "react";
 import Header from "./Header";
-import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
-
-const mapStyles = {
-  width: "50%",
-  height: "50%",
-};
-
-const locations = [
-  {
-    name: "Rough Peel Music",
-    location: {
-      lat: -41.2940644,
-      lng: 174.7752671,
-    },
-  },
-];
+import GoogleMapReact from "google-map-react";
+import Marker from "./Marker";
 
 class StoreMap extends React.Component {
+  state = {
+    show: false,
+  };
+  _onChildClick = (key, childProps) => {
+    this.setState({ show: !this.state.show });
+  };
   goToDashboard = (event) => {
     this.props.history.push(`/dashboard`);
   };
@@ -36,24 +28,34 @@ class StoreMap extends React.Component {
         <button onClick={this.goToList}>Go to store list</button>
         <button onClick={this.goToDashboard}>Go to dashboard</button>
         <button onClick={this.goToFavourites}>Go to favourites</button>
-        <Map
-          google={this.props.google}
-          zoom={5}
-          style={mapStyles}
-          initialCenter={{
-            lat: -41.2932786,
-            lng: 174.7837615,
-          }}
-        >
-          {locations.map((item) => {
-            return <Marker key={item.name} position={item.location} />;
-          })}
-        </Map>
+
+        <div style={{ height: "50vh", width: "50vw" }}>
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_KEY }}
+            defaultCenter={{
+              lat: -41.2932786,
+              lng: 174.7837615,
+            }}
+            defaultZoom={5}
+            onChildClick={this._onChildClick}
+          >
+            {Object.keys(this.props.stores).map((key) => {
+              return (
+                <Marker
+                  key={key}
+                  index={key}
+                  details={this.props.stores[key]}
+                  lat={this.props.stores[key].lat}
+                  lng={this.props.stores[key].lng}
+                  show={this.state.show}
+                />
+              );
+            })}
+          </GoogleMapReact>
+        </div>
       </div>
     );
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyC305hFfwxNiq1CZavOBfLTJxyMtVlMrYA",
-})(StoreMap);
+export default StoreMap;
