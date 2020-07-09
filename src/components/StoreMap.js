@@ -1,15 +1,40 @@
 import React from "react";
 import Header from "./Header";
-import GoogleMapReact from "google-map-react";
-import Marker from "./Marker";
+import {
+  GoogleMap,
+  LoadScript,
+  MarkerClusterer,
+  Marker,
+} from "@react-google-maps/api";
+
+const mapContainerStyle = {
+  height: "400px",
+  width: "800px",
+};
+
+const center = { lat: -41.2932786, lng: 174.7837615 };
+
+const options = {
+  imagePath:
+    "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+};
+
+// function createKey(location) {
+//   return location.lat + location.lng;
+// }
+
+function createKey(length) {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 class StoreMap extends React.Component {
-  state = {
-    show: false,
-  };
-  _onChildClick = (key, childProps) => {
-    this.setState({ show: !this.state.show });
-  };
   goToDashboard = (event) => {
     this.props.history.push(`/dashboard`);
   };
@@ -21,6 +46,7 @@ class StoreMap extends React.Component {
   };
 
   render() {
+    const locations = [];
     return (
       <div className="store-map">
         <Header title="Vinyl Directory" />
@@ -28,31 +54,33 @@ class StoreMap extends React.Component {
         <button onClick={this.goToList}>Go to store list</button>
         <button onClick={this.goToDashboard}>Go to dashboard</button>
         <button onClick={this.goToFavourites}>Go to favourites</button>
-
-        <div style={{ height: "50vh", width: "50vw" }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_KEY }}
-            defaultCenter={{
-              lat: -41.2932786,
-              lng: 174.7837615,
-            }}
-            defaultZoom={5}
-            onChildClick={this._onChildClick}
+        {Object.keys(this.props.stores).map((key) => {
+          const obj = {
+            lat: this.props.stores[key].lat,
+            lng: this.props.stores[key].lng,
+          };
+          locations.push(obj);
+        })}
+        <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_KEY}>
+          <GoogleMap
+            id="marker-example"
+            mapContainerStyle={mapContainerStyle}
+            zoom={3}
+            center={center}
           >
-            {Object.keys(this.props.stores).map((key) => {
-              return (
-                <Marker
-                  key={key}
-                  index={key}
-                  details={this.props.stores[key]}
-                  lat={this.props.stores[key].lat}
-                  lng={this.props.stores[key].lng}
-                  show={this.state.show}
-                />
-              );
-            })}
-          </GoogleMapReact>
-        </div>
+            <MarkerClusterer options={options}>
+              {(clusterer) =>
+                locations.map((location) => (
+                  <Marker
+                    key={createKey(10)}
+                    position={location}
+                    clusterer={clusterer}
+                  />
+                ))
+              }
+            </MarkerClusterer>
+          </GoogleMap>
+        </LoadScript>
       </div>
     );
   }
