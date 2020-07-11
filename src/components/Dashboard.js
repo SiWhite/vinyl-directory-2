@@ -20,7 +20,12 @@ class Dashboard extends React.Component {
       return <Login authenticate={this.props.authenticate} />;
     }
     if (this.props.uid !== this.props.owner) {
-      return <h1>Sorry you are not authorised to view this page</h1>;
+      return (
+        <div className="dashboard">
+          <h1>Sorry you are not authorised to view this page</h1>
+          {logout}
+        </div>
+      );
     }
     return (
       <div className="dashboard">
