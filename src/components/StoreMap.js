@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import MarkerWithInfoWindow from "./MarkerWithInfoWindow";
 import {
   GoogleMap,
   LoadScript,
@@ -79,25 +80,30 @@ class StoreMap extends React.Component {
             zoom={7}
             center={center}
           >
-            <MarkerClusterer options={options}>
-              {(clusterer) =>
-                locations.map((location) => (
-                  <Marker
-                    key={createKey(10)}
-                    id={createKey(10)}
-                    position={location}
-                    clusterer={clusterer}
-                    onClick={() => this.handleToggleOpen()}
-                  >
-                    {this.state.isOpen && (
-                      <InfoWindow onCloseClick={() => this.handleToggleClose()}>
-                        <span>Something</span>
-                      </InfoWindow>
-                    )}
-                  </Marker>
-                ))
-              }
-            </MarkerClusterer>
+            {/* <MarkerClusterer options={options}>
+              {(clusterer) => */}
+            {locations.map((location) => (
+              <MarkerWithInfoWindow
+                key={createKey(10)}
+                position={location}
+                id={createKey(10)}
+                handleToggleOpen={() => this.handleToggleOpen()}
+              />
+              // <Marker
+              //   key={createKey(10)}
+              //   id={createKey(10)}
+              //   position={location}
+              //   // clusterer={clusterer}
+              //   onClick={() => this.handleToggleOpen()}
+              // >
+              //   {this.state.isOpen && (
+              //     <InfoWindow onCloseClick={() => this.handleToggleClose()}>
+              //       <span>Something</span>
+              //     </InfoWindow>
+              //   )}
+              // </Marker>
+            ))}
+            {/* </MarkerClusterer> */}
           </GoogleMap>
         </LoadScript>
       </div>
