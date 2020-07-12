@@ -33,10 +33,27 @@ class MarkerWithInfoWindow extends React.Component {
         id={createKey(10)}
         onClick={() => this.handleToggleOpen()}
         position={this.props.position}
+        clusterer={this.props.clusterer}
+        name={this.props.name}
       >
         {this.state.isOpen && (
-          <InfoWindow onCloseClick={this.props.handleToggleClose}>
-            <span>Something</span>
+          <InfoWindow onCloseClick={this.handleToggleClose}>
+            <div>
+              <h2>{this.props.name}</h2>
+              <address>
+                {this.props.address1}
+                <br></br>
+                {this.props.address2}
+                <br></br>
+                {this.props.address3}
+                <br></br>
+              </address>
+              <a href={"tel:" + this.props.phone}>{this.props.phone}</a>{" "}
+              <br></br>
+              <a href={this.props.url} target="_blank">
+                Visit website
+              </a>
+            </div>
           </InfoWindow>
         )}
       </Marker>

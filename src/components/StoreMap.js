@@ -1,13 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import MarkerWithInfoWindow from "./MarkerWithInfoWindow";
-import {
-  GoogleMap,
-  LoadScript,
-  MarkerClusterer,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
+import { GoogleMap, LoadScript, MarkerClusterer } from "@react-google-maps/api";
 
 const mapContainerStyle = {
   height: "400px",
@@ -22,10 +16,10 @@ const options = {
 };
 
 function createKey(length) {
-  var result = "";
-  var characters =
+  let result = "";
+  const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  var charactersLength = characters.length;
+  const charactersLength = characters.length;
   for (var i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
@@ -59,6 +53,7 @@ class StoreMap extends React.Component {
 
   render() {
     const locations = [];
+    const stores = [];
     return (
       <div className="store-map">
         <Header title="Vinyl Directory" />
@@ -73,6 +68,21 @@ class StoreMap extends React.Component {
           };
           locations.push(obj);
         })}
+        {Object.keys(this.props.stores).forEach((key) => {
+          const obj = {
+            name: this.props.stores[key].name,
+            address1: this.props.stores[key].address1,
+            address2: this.props.stores[key].address2,
+            address3: this.props.stores[key].address3,
+            phone: this.props.stores[key].phone,
+            url: this.props.stores[key].url,
+            location: {
+              lat: this.props.stores[key].lat,
+              lng: this.props.stores[key].lng,
+            },
+          };
+          stores.push(obj);
+        })}
         <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_KEY}>
           <GoogleMap
             id="marker-example"
@@ -80,30 +90,23 @@ class StoreMap extends React.Component {
             zoom={7}
             center={center}
           >
-            {/* <MarkerClusterer options={options}>
-              {(clusterer) => */}
-            {locations.map((location) => (
-              <MarkerWithInfoWindow
-                key={createKey(10)}
-                position={location}
-                id={createKey(10)}
-                handleToggleOpen={() => this.handleToggleOpen()}
-              />
-              // <Marker
-              //   key={createKey(10)}
-              //   id={createKey(10)}
-              //   position={location}
-              //   // clusterer={clusterer}
-              //   onClick={() => this.handleToggleOpen()}
-              // >
-              //   {this.state.isOpen && (
-              //     <InfoWindow onCloseClick={() => this.handleToggleClose()}>
-              //       <span>Something</span>
-              //     </InfoWindow>
-              //   )}
-              // </Marker>
-            ))}
-            {/* </MarkerClusterer> */}
+            <MarkerClusterer options={options}>
+              {(clusterer) =>
+                stores.map((store) => (
+                  <MarkerWithInfoWindow
+                    key={createKey(10)}
+                    clusterer={clusterer}
+                    position={store.location}
+                    name={store.name}
+                    address1={store.address1}
+                    address2={store.address2}
+                    address3={store.address3}
+                    phone={store.phone}
+                    url={store.url}
+                  />
+                ))
+              }
+            </MarkerClusterer>
           </GoogleMap>
         </LoadScript>
       </div>
