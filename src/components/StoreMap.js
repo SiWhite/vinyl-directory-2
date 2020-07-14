@@ -1,7 +1,21 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import Header from "./Header";
 import MarkerWithInfoWindow from "./MarkerWithInfoWindow";
 import { GoogleMap, LoadScript, MarkerClusterer } from "@react-google-maps/api";
+import MapControl from "./MapControl";
+
+const handleChange = () => {
+  console.log("update region");
+};
+
+const handleOnLoad = (map) => {
+  const controlButtonDiv = document.createElement("div");
+  ReactDOM.render(<MapControl />, controlButtonDiv);
+  map.controls[window.google.maps.ControlPosition.TOP_RIGHT].push(
+    controlButtonDiv
+  );
+};
 
 const mapContainerStyle = {
   height: "400px",
@@ -29,6 +43,7 @@ function createKey(length) {
 class StoreMap extends React.Component {
   state = {
     openInfoWindowMarkerId: "",
+    region: "",
   };
   goToDashboard = (event) => {
     this.props.history.push(`/dashboard`);
@@ -89,6 +104,7 @@ class StoreMap extends React.Component {
             mapContainerStyle={mapContainerStyle}
             zoom={7}
             center={center}
+            onLoad={(map) => handleOnLoad(map)}
           >
             <MarkerClusterer options={options}>
               {(clusterer) =>
