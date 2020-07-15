@@ -3,19 +3,6 @@ import ReactDOM from "react-dom";
 import Header from "./Header";
 import MarkerWithInfoWindow from "./MarkerWithInfoWindow";
 import { GoogleMap, LoadScript, MarkerClusterer } from "@react-google-maps/api";
-import MapControl from "./MapControl";
-
-const handleChange = () => {
-  console.log("update region");
-};
-
-const handleOnLoad = (map) => {
-  const controlButtonDiv = document.createElement("div");
-  ReactDOM.render(<MapControl />, controlButtonDiv);
-  map.controls[window.google.maps.ControlPosition.TOP_RIGHT].push(
-    controlButtonDiv
-  );
-};
 
 const mapContainerStyle = {
   height: "400px",
@@ -42,8 +29,7 @@ function createKey(length) {
 
 class StoreMap extends React.Component {
   state = {
-    openInfoWindowMarkerId: "",
-    region: "",
+    region: "Select Region",
   };
   goToDashboard = (event) => {
     this.props.history.push(`/dashboard`);
@@ -59,11 +45,40 @@ class StoreMap extends React.Component {
       isOpen: true,
     });
   };
-
   handleToggleClose = () => {
     this.setState({
       isOpen: false,
     });
+  };
+  handleOnLoad = (map) => {
+    const controlButtonDiv = document.createElement("div");
+    ReactDOM.render(
+      <select onChange={this.handleChange} value={this.state.value}>
+        <option value="Select Region">Select Region</option>
+        <option value="Auckland">Auckland</option>
+        <option value="Wellington">Wellington</option>
+        <option value="Christchurch">Christchurch</option>
+      </select>,
+      controlButtonDiv
+    );
+    map.controls[window.google.maps.ControlPosition.TOP_RIGHT].push(
+      controlButtonDiv
+    );
+  };
+
+  handleChange = (e) => {
+    const region = e.target.value;
+    this.setState({ region: region }, this.updateRegion(region));
+  };
+
+  updateRegion = (region) => {
+    if (region === "Auckland") {
+      console.log("move to Auckland");
+    } else if (region === "Wellington") {
+      console.log("move to Wellington");
+    } else if (region === "Christchurch") {
+      console.log("move to Christchurch");
+    }
   };
 
   render() {
@@ -104,7 +119,7 @@ class StoreMap extends React.Component {
             mapContainerStyle={mapContainerStyle}
             zoom={7}
             center={center}
-            onLoad={(map) => handleOnLoad(map)}
+            onLoad={(map) => this.handleOnLoad(map)}
           >
             <MarkerClusterer options={options}>
               {(clusterer) =>
