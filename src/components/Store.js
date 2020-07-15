@@ -22,9 +22,9 @@ class Store extends React.Component {
           <br />
           {address3}
         </address>
-        <a href={`tel:${phone.replace(/\s/g, "")}`}>{phone}</a>
+        {phone && <a href={`tel:${phone.replace(/\s/g, "")}`}>{phone}</a>}
         <br />
-        <a href={url}>Visit website</a>
+        {url && <a href={url}>Visit website</a>}
         <br />
         <button onClick={() => this.props.addToFavourites(this.props.index)}>
           Add to favourites

@@ -29,7 +29,7 @@ class StoreList extends React.Component {
           ))}
         </ul>
         <button onClick={this.goToMap}>Go to store map</button>
-        <button onClick={this.goToDashboard}>Go to dashboard</button>
+        {/* <button onClick={this.goToDashboard}>Go to dashboard</button> */}
         <button onClick={this.goToFavourites}>Go to favourites</button>
       </div>
     );

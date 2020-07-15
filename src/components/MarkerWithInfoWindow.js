@@ -48,15 +48,19 @@ class MarkerWithInfoWindow extends React.Component {
                 {this.props.address3}
                 <br></br>
               </address>
-              <a href={"tel:" + this.props.phone}>{this.props.phone}</a>{" "}
+              {this.props.phone && (
+                <a href={"tel:" + this.props.phone}>{this.props.phone}</a>
+              )}
               <br></br>
-              <a
-                href={this.props.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Visit website
-              </a>
+              {this.props.url && (
+                <a
+                  href={this.props.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Visit website
+                </a>
+              )}
             </div>
           </InfoWindow>
         )}

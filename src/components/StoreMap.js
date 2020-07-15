@@ -27,12 +27,16 @@ function createKey(length) {
 
 class StoreMap extends React.Component {
   state = {
-    region: "Select Region",
+    region: "All",
     center: { lat: -41.2932786, lng: 174.7837615 },
     zoom: 5,
   };
   regions = [
     {
+      All: {
+        lat: -41.3562773,
+        lng: 174.4775412,
+      },
       Northland: {
         lat: -35.4627936,
         lng: 173.8409633,
@@ -40,6 +44,18 @@ class StoreMap extends React.Component {
       Auckland: {
         lat: -36.8621432,
         lng: 174.5846066,
+      },
+      CentralNorth: {
+        lat: -39.2791262,
+        lng: 175.9277365,
+      },
+      Wellington: {
+        lat: -41.2442196,
+        lng: 174.6916437,
+      },
+      SouthIsland: {
+        lat: -43.3372441,
+        lng: 170.0830099,
       },
     },
   ];
@@ -66,7 +82,7 @@ class StoreMap extends React.Component {
     const controlButtonDiv = document.createElement("div");
     ReactDOM.render(
       <select onChange={this.handleChange} value={this.state.value}>
-        <option value="Select Region">Select Region</option>
+        <option value="All">All Regions</option>
         <option value="Northland">Northland</option>
         <option value="Auckland">Auckland</option>
         <option value="CentralNorth">Central North Island</option>
@@ -86,15 +102,24 @@ class StoreMap extends React.Component {
   };
 
   updateRegion = (region) => {
-    this.setState({ zoom: 7 });
-    if (region === "Northland") {
+    if (region === "All") {
+      this.setState({ zoom: 5 });
+      this.setState({ center: this.regions[0].All });
+    } else if (region === "Northland") {
+      this.setState({ zoom: 7 });
       this.setState({ center: this.regions[0].Northland });
     } else if (region === "Auckland") {
+      this.setState({ zoom: 7 });
       this.setState({ center: this.regions[0].Auckland });
+    } else if (region === "CentralNorth") {
+      this.setState({ zoom: 7 });
+      this.setState({ center: this.regions[0].CentralNorth });
     } else if (region === "Wellington") {
-      console.log("move to Wellington");
-    } else if (region === "Christchurch") {
-      console.log("move to Christchurch");
+      this.setState({ zoom: 7 });
+      this.setState({ center: this.regions[0].Wellington });
+    } else if (region === "SouthIsland") {
+      this.setState({ zoom: 6 });
+      this.setState({ center: this.regions[0].SouthIsland });
     }
   };
 
@@ -105,7 +130,7 @@ class StoreMap extends React.Component {
         <Header title="Vinyl Directory" />
         <h2>Store Map</h2>
         <button onClick={this.goToList}>Go to store list</button>
-        <button onClick={this.goToDashboard}>Go to dashboard</button>
+        {/* <button onClick={this.goToDashboard}>Go to dashboard</button> */}
         <button onClick={this.goToFavourites}>Go to favourites</button>
         {Object.keys(this.props.stores).forEach((key) => {
           const obj = {

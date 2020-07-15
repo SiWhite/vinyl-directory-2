@@ -47,7 +47,7 @@ class Dashboard extends React.Component {
         </button>
         <button onClick={this.goToMap}>Go to store map</button>
         <button onClick={this.goToList}>Go to store list</button>
-        <button onClick={this.goToFavourites}>Go to favourites</button>
+        {/* <button onClick={this.goToFavourites}>Go to favourites</button> */}
       </div>
     );
   }
