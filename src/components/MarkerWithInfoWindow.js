@@ -1,17 +1,6 @@
 import React from "react";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 
-function createKey(length) {
-  var result = "";
-  var characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
-
 class MarkerWithInfoWindow extends React.Component {
   state = {
     isOpen: false,
@@ -20,18 +9,29 @@ class MarkerWithInfoWindow extends React.Component {
     this.setState({
       isOpen: !this.state.isOpen,
     });
+    this.props.handleOtherWindows(this);
   };
   handleToggleClose = () => {
     this.setState({
       isOpen: false,
     });
   };
+  createKey(length) {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
   render() {
     return (
       <Marker
-        key={createKey(10)}
-        id={createKey(10)}
-        onClick={() => this.handleToggleOpen()}
+        id={this.createKey(10)}
+        onClick={() => this.handleToggleOpen(this)}
         position={this.props.position}
         clusterer={this.props.clusterer}
         name={this.props.name}

@@ -30,6 +30,7 @@ class StoreMap extends React.Component {
     region: "All",
     center: { lat: -41.2932786, lng: 174.7837615 },
     zoom: 5,
+    openWindow: null,
   };
   regions = [
     {
@@ -68,16 +69,11 @@ class StoreMap extends React.Component {
   goToFavourites = (event) => {
     this.props.history.push(`/favourites`);
   };
-  handleToggleOpen = () => {
-    this.setState({
-      isOpen: true,
-    });
+  handleOtherWindows = (marker) => {
+    // this.setState({ openWindow: marker });
+    // console.log(this.state.openWindow);
   };
-  handleToggleClose = () => {
-    this.setState({
-      isOpen: false,
-    });
-  };
+
   handleOnLoad = (map) => {
     const controlButtonDiv = document.createElement("div");
     ReactDOM.render(
@@ -130,7 +126,6 @@ class StoreMap extends React.Component {
         <Header title="Vinyl Directory" />
         <h2>Store Map</h2>
         <button onClick={this.goToList}>Go to store list</button>
-        {/* <button onClick={this.goToDashboard}>Go to dashboard</button> */}
         <button onClick={this.goToFavourites}>Go to favourites</button>
         {Object.keys(this.props.stores).forEach((key) => {
           const obj = {
@@ -167,6 +162,7 @@ class StoreMap extends React.Component {
                     address3={store.address3}
                     phone={store.phone}
                     url={store.url}
+                    handleOtherWindows={this.handleOtherWindows}
                   />
                 ))
               }
