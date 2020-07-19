@@ -69,9 +69,15 @@ class StoreMap extends React.Component {
   goToFavourites = (event) => {
     this.props.history.push(`/favourites`);
   };
-  handleOtherWindows = (marker) => {
-    // this.setState({ openWindow: marker });
-    // console.log(this.state.openWindow);
+  setOpenWindow = (marker) => {
+    this.closePreviousWindow();
+    this.setState({ openWindow: marker });
+    console.log("open ", this.state.openWindow);
+  };
+  closePreviousWindow = () => {
+    if (this.state.openWindow) {
+      console.log("close ", this.state.openWindow);
+    }
   };
 
   handleOnLoad = (map) => {
@@ -135,6 +141,7 @@ class StoreMap extends React.Component {
             address3: this.props.stores[key].address3,
             phone: this.props.stores[key].phone,
             url: this.props.stores[key].url,
+            image: this.props.stores[key].image,
             location: {
               lat: this.props.stores[key].lat,
               lng: this.props.stores[key].lng,
@@ -162,7 +169,7 @@ class StoreMap extends React.Component {
                     address3={store.address3}
                     phone={store.phone}
                     url={store.url}
-                    handleOtherWindows={this.handleOtherWindows}
+                    image={store.image}
                   />
                 ))
               }

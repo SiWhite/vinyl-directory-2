@@ -9,7 +9,6 @@ class MarkerWithInfoWindow extends React.Component {
     this.setState({
       isOpen: !this.state.isOpen,
     });
-    this.props.handleOtherWindows(this);
   };
   handleToggleClose = () => {
     this.setState({
@@ -31,14 +30,17 @@ class MarkerWithInfoWindow extends React.Component {
     return (
       <Marker
         id={this.createKey(10)}
-        onClick={() => this.handleToggleOpen(this)}
+        onClick={() => this.handleToggleOpen()}
         position={this.props.position}
         clusterer={this.props.clusterer}
         name={this.props.name}
+        image={this.props.image}
+        openWindow={this.props.openWindow}
       >
         {this.state.isOpen && (
           <InfoWindow onCloseClick={this.handleToggleClose}>
             <div>
+              <img src={this.props.image} alt={this.props.name} />
               <h2>{this.props.name}</h2>
               <address>
                 {this.props.address1}
