@@ -30,7 +30,6 @@ class StoreMap extends React.Component {
     region: "All",
     center: { lat: -41.2932786, lng: 174.7837615 },
     zoom: 5,
-    openWindow: null,
   };
   regions = [
     {
@@ -68,16 +67,6 @@ class StoreMap extends React.Component {
   };
   goToFavourites = (event) => {
     this.props.history.push(`/favourites`);
-  };
-  setOpenWindow = (marker) => {
-    this.closePreviousWindow();
-    this.setState({ openWindow: marker });
-    console.log("open ", this.state.openWindow);
-  };
-  closePreviousWindow = () => {
-    if (this.state.openWindow) {
-      console.log("close ", this.state.openWindow);
-    }
   };
 
   handleOnLoad = (map) => {
@@ -170,6 +159,8 @@ class StoreMap extends React.Component {
                     phone={store.phone}
                     url={store.url}
                     image={store.image}
+                    setOpenWindow={this.setOpenWindow}
+                    isOpen={this.state.isOpen}
                   />
                 ))
               }
