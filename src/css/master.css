@@ -1,0 +1,28 @@
+header {
+  margin-bottom: 40px;
+}
+
+header .logo {
+  display: block;
+  margin-top: 20px;
+  max-width: 330px;
+}
+
+.logo img {
+  width: 100%;
+}
+
+.marker {
+  width: 25px;
+  height: 25px;
+  background: url("/images/icon.png");
+}
+
+footer {
+  width: 100%;
+  color: #1d1d1b;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 0px;
+  padding: 20px 0 10px;
+}

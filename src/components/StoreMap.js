@@ -1,12 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Header from "./Header";
+import Intro from "./Intro";
+import Adverts from "./Adverts";
+import Footer from "./Footer";
 import MarkerWithInfoWindow from "./MarkerWithInfoWindow";
 import { GoogleMap, LoadScript, MarkerClusterer } from "@react-google-maps/api";
 
 const mapContainerStyle = {
-  height: "400px",
-  width: "800px",
+  height: "500px",
+  width: "100%",
 };
 
 const options = {
@@ -117,11 +120,12 @@ class StoreMap extends React.Component {
   render() {
     const stores = [];
     return (
-      <div className="store-map">
+      <div className="container">
         <Header title="Vinyl Directory" />
-        <h2>Store Map</h2>
         <button onClick={this.goToList}>Go to store list</button>
         <button onClick={this.goToFavourites}>Go to favourites</button>
+        <Intro />
+      <div className="store-map">
         {Object.keys(this.props.stores).forEach((key) => {
           const obj = {
             name: this.props.stores[key].name,
@@ -167,6 +171,9 @@ class StoreMap extends React.Component {
             </MarkerClusterer>
           </GoogleMap>
         </LoadScript>
+      </div>
+      <Adverts />
+      <Footer />
       </div>
     );
   }

@@ -76,7 +76,7 @@ class MarkerWithInfoWindow extends React.Component {
             zIndex={99999999}
           >
             <div>
-              <img src={this.props.image} alt={this.props.name} />
+              {/* <img src={this.props.image} alt={this.props.name} /> */}
               <h2>{this.props.name}</h2>
               <address>
                 {this.props.address1}

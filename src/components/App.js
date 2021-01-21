@@ -8,6 +8,8 @@ import NotFound from "./NotFound";
 import { Route, Switch } from "react-router-dom";
 import stores from "../stores";
 import base, { firebaseApp } from "../base";
+import '../css/bootstrap.min.css';
+import '../css/master.css';
 
 class App extends React.Component {
   state = {
@@ -93,6 +95,11 @@ class App extends React.Component {
 
   authHandler = async (authData) => {
     const store = await base.fetch("/", { context: this });
+    if (!store.owner) {
+      await base.post(`/owner`,{
+        data: authData.user.uid
+      })
+    }
     if (authData.user) {
       this.setState({
         uid: authData.user.uid,

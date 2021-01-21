@@ -1,5 +1,14 @@
 import React from "react";
 
-const Header = (props) => <header>{props.title}</header>;
+class Header extends React.Component {
+    render() {
+        return (
+            <header>
+                <a className="logo" href="/"><img src="/images/logo.png" alt="vinyldirectory.nz" /></a>
+            </header>
+        );
+    }
+    }
+
 
 export default Header;
