@@ -1,5 +1,6 @@
 import React from "react";
 import { Marker, InfoWindow } from "@react-google-maps/api";
+import icon from '../assets/icon.png';
 
 class MarkerWithInfoWindow extends React.Component {
   state = {
@@ -61,6 +62,7 @@ class MarkerWithInfoWindow extends React.Component {
   render() {
     return (
       <Marker
+        className="marker"
         id={this.createKey(10)}
         position={this.props.position}
         clusterer={this.props.clusterer}
@@ -68,6 +70,7 @@ class MarkerWithInfoWindow extends React.Component {
         image={this.props.image}
         openWindow={this.props.openWindow}
         onClick={(e) => this.handleToggleOpen(this)}
+        icon={{url: icon}}
       >
         {this.state.isOpen && (
           <InfoWindow

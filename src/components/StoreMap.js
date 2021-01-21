@@ -14,7 +14,7 @@ const mapContainerStyle = {
 
 const options = {
   imagePath:
-    "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+    'https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/icon',
 };
 
 function createKey(length) {
@@ -122,8 +122,6 @@ class StoreMap extends React.Component {
     return (
       <div className="container">
         <Header title="Vinyl Directory" />
-        <button onClick={this.goToList}>Go to store list</button>
-        <button onClick={this.goToFavourites}>Go to favourites</button>
         <Intro />
       <div className="store-map">
         {Object.keys(this.props.stores).forEach((key) => {

@@ -5,15 +5,6 @@ import Store from "./Store";
 import Footer from "./Footer";
 
 class StoreList extends React.Component {
-  goToDashboard = (event) => {
-    this.props.history.push(`/dashboard`);
-  };
-  goToMap = (event) => {
-    this.props.history.push(`/`);
-  };
-  goToFavourites = (event) => {
-    this.props.history.push(`/favourites`);
-  };
 
   render() {
     return (
@@ -32,8 +23,6 @@ class StoreList extends React.Component {
             />
           ))}
         </ul>
-        <button onClick={this.goToMap}>Go to store map</button>
-        <button onClick={this.goToFavourites}>Go to favourites</button>
       </div>
       <Footer />
       </div>

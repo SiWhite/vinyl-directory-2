@@ -44,9 +44,6 @@ class Favourites extends React.Component {
         <Header title="Vinyl Directory" />
         <h2>Favourites</h2>
         <ul className="favourites">{favIds.map(this.renderFavourite)}</ul>
-        <button onClick={this.goToMap}>Go to store map</button>
-        <button onClick={this.goToList}>Go to store list</button>
-        <button onClick={this.goToDashboard}>Go to dashboard</button>
       </div>
     );
   }

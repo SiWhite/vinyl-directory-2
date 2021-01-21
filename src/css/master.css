@@ -1,3 +1,8 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+
 header {
   margin-bottom: 40px;
 }
@@ -15,14 +20,54 @@ header .logo {
 .marker {
   width: 25px;
   height: 25px;
-  background: url("/images/icon.png");
+  background: url("/images/icon.png") !important;
 }
 
 footer {
+  clear: both;
   width: 100%;
   color: #1d1d1b;
   text-align: center;
   margin-top: 50px;
   margin-bottom: 0px;
   padding: 20px 0 10px;
+}
+
+.store {
+  overflow: hidden;
+  background: #eee;
+  padding: 0;
+  margin-right: 2%;
+  width: 32%;
+  min-height: 235px;
+  margin-bottom: 15px;
+  padding: 15px;
+}
+
+.store img {
+  width: 150px;
+  height: 150px;
+  float: left;
+  margin: 0 15px 15px 0;
+}
+
+.store h3 {
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+@media (max-width: 768px) {
+  .store {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.store:nth-of-type(3n + 3) {
+  margin-right: 0;
+}
+
+nav {
+  float: right;
 }

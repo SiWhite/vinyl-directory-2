@@ -12,8 +12,9 @@ class Store extends React.Component {
       image,
     } = this.props.details;
     return (
-      <li className="store">
+      <li className="store col-sm-4">
         <img src={image} alt={name} />
+        <div className="store-details">
         <h3 className="store__name">{name}</h3>
         <address>
           {address1}
@@ -29,6 +30,7 @@ class Store extends React.Component {
         <button onClick={() => this.props.addToFavourites(this.props.index)}>
           Add to favourites
         </button>
+        </div>
       </li>
     );
   }
