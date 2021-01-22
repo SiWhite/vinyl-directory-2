@@ -122,7 +122,7 @@ class StoreMap extends React.Component {
     return (
       <div className="container">
         <Header title="Vinyl Directory" />
-        <Intro />
+        <Intro insideMap={true}/>
       <div className="store-map">
         {Object.keys(this.props.stores).forEach((key) => {
           const obj = {

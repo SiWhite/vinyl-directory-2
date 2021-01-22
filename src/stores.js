@@ -276,7 +276,7 @@ const stores = {
     image: "https://via.placeholder.com/150",
   },
   store26: {
-    name: "The Station (formerly Vinyl Destination)",
+    name: "The Station",
     address1: "52 Devonport Rd",
     address2: "Tauranga",
     address3: "3110",

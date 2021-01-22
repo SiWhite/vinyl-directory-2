@@ -27,9 +27,7 @@ class Store extends React.Component {
         <br />
         {url && <a href={url}>Visit website</a>}
         <br />
-        <button onClick={() => this.props.addToFavourites(this.props.index)}>
-          Add to favourites
-        </button>
+        <button className="btn-fav" onClick={() => this.props.addToFavourites(this.props.index)}></button>
         </div>
       </li>
     );

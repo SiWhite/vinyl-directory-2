@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import Intro from "./Intro";
 
 class Favourites extends React.Component {
   goToDashboard = (event) => {
@@ -40,10 +41,13 @@ class Favourites extends React.Component {
   render() {
     const favIds = Object.keys(this.props.favourites);
     return (
-      <div className="favourites">
-        <Header title="Vinyl Directory" />
-        <h2>Favourites</h2>
-        <ul className="favourites">{favIds.map(this.renderFavourite)}</ul>
+      <div className="container">
+        <div className="favourites">
+          <Header title="Vinyl Directory" />
+          <Intro insideFavs={true} />
+          <h2>Favourites</h2>
+          <ul className="favourites">{favIds.map(this.renderFavourite)}</ul>
+        </div>
       </div>
     );
   }

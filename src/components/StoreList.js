@@ -11,7 +11,7 @@ class StoreList extends React.Component {
       <div className="container">
       <div className="store-list">
         <Header title="Vinyl Directory" />
-        <Intro />
+        <Intro insideList={true} />
         <h2>Store List</h2>
         <ul className="stores">
           {Object.keys(this.props.stores).map((key) => (
