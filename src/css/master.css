@@ -73,8 +73,15 @@ nav {
   margin-top: 20px;
 }
 
-nav button {
-  margin-right: 5px;
+nav a {
+  margin-right: 15px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+nav a.active {
+  text-decoration: none;
+  color: #23527c;
 }
 
 .btn-fav {
@@ -91,4 +98,29 @@ nav button {
 
 .btn-fav:hover {
   cursor: pointer;
+}
+
+.info-window h2 {
+  margin: 0 0 10px !important;
+}
+
+.info-window address {
+  margin: 0 0 10px !important;
+}
+
+.info-window .phone-link {
+  margin: 0 0 5px !important;
+  display: inline-block;
+}
+
+.content {
+  margin-bottom: 50px;
+}
+
+.store-map {
+  margin-bottom: 20px;
+}
+
+.region-selector {
+  font-size: 1.5em;
 }

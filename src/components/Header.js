@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from 'react-router';
+import { NavLink } from "react-router-dom";
 
 class Header extends React.Component {
       goToMap = (event) => {
@@ -16,9 +17,9 @@ class Header extends React.Component {
             <header>
                 <a className="logo" href="/"><img src="/images/logo.png" alt="vinyldirectory.nz" /></a>
                 <nav className="float-right">
-                    <button onClick={this.goToMap}>Map view</button>
-                    <button onClick={this.goToList}>List view</button>
-                    <button onClick={this.goToFavourites}>My Favourites</button>
+                <NavLink to="/" activeClassName="active" exact={true} className="nav__item">Map view</NavLink>
+                <NavLink to="/list" activeClassName="active" className="nav__item">List view</NavLink>
+                <NavLink to="/favourites" activeClassName="active" className="nav__item">Favourites</NavLink>
                 </nav>
             </header>
         );

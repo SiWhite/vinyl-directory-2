@@ -5,7 +5,7 @@ class Adverts extends React.Component {
         return (
             <div className="advert clearfix">
                 <div style={{width: '48.75%', float: 'left', cursor: 'pointer', marginTop: '30px'}}>
-                    <a href="https://offthetracks.co.nz/" target="_blank">
+                    <a href="https://offthetracks.co.nz/" target="_blank" rel="noopener noreferrer">
                     <img src="/images/off-the-tracks-ad-vinyldir.jpg" alt="Off the tracks" />
                     </a>
                 </div>

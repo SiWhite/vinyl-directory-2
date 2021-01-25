@@ -75,7 +75,7 @@ class StoreMap extends React.Component {
   handleOnLoad = (map) => {
     const controlButtonDiv = document.createElement("div");
     ReactDOM.render(
-      <select onChange={this.handleChange} value={this.state.value}>
+      <select className="region-selector" onChange={this.handleChange} value={this.state.value}>
         <option value="All">All Regions</option>
         <option value="Northland">Northland</option>
         <option value="Auckland">Auckland</option>

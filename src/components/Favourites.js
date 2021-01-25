@@ -1,6 +1,8 @@
 import React from "react";
 import Header from "./Header";
 import Intro from "./Intro";
+import Adverts from "./Adverts";
+import Footer from "./Footer";
 
 class Favourites extends React.Component {
   goToDashboard = (event) => {
@@ -40,14 +42,18 @@ class Favourites extends React.Component {
   };
   render() {
     const favIds = Object.keys(this.props.favourites);
+    const hasFavs = favIds.length > 0;
+    console.log(hasFavs);
     return (
       <div className="container">
         <div className="favourites">
           <Header title="Vinyl Directory" />
           <Intro insideFavs={true} />
           <h2>Favourites</h2>
-          <ul className="favourites">{favIds.map(this.renderFavourite)}</ul>
+          {hasFavs ? <ul className="favourites">{favIds.map(this.renderFavourite)}</ul> : <p>You haven't added any favourites yet. Try adding some from the <a onClick={this.goToList}>list of stores</a>.</p>}
         </div>
+        <Adverts />
+        <Footer />
       </div>
     );
   }

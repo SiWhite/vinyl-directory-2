@@ -78,8 +78,7 @@ class MarkerWithInfoWindow extends React.Component {
             optimized={false}
             zIndex={99999999}
           >
-            <div>
-              {/* <img src={this.props.image} alt={this.props.name} /> */}
+            <div className="info-window">
               <h2>{this.props.name}</h2>
               <address>
                 {this.props.address1}
@@ -90,7 +89,7 @@ class MarkerWithInfoWindow extends React.Component {
                 <br></br>
               </address>
               {this.props.phone && (
-                <a href={"tel:" + this.props.phone}>{this.props.phone}</a>
+                <a className="phone-link" href={"tel:" + this.props.phone}>{this.props.phone}</a>
               )}
               <br></br>
               {this.props.url && (
