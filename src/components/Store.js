@@ -21,7 +21,7 @@ class Store extends React.Component {
       <li className="store col-sm-4" data-region={region}>
         <div className="row">
           <img src={image} alt={name} className="col-sm-6"/>
-          <div className="store-details col-sm-5">
+          <div className="store-details col-sm-5 col-xs-4">
             <h3 className="store__name">{name}</h3>
             <address>
               {address1}

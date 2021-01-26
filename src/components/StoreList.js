@@ -22,7 +22,8 @@ class StoreList extends React.Component {
     aucklandStores = document.querySelectorAll("li[data-region='Auckland']"),
     centralNorthStores = document.querySelectorAll("li[data-region='Central North Island']"),
     wellingtonStores = document.querySelectorAll("li[data-region='Wellington']"),
-    southIslandStores = document.querySelectorAll("li[data-region='South Island']");
+    southIslandStores = document.querySelectorAll("li[data-region='South Island']"),
+    onlineOnlyStores = document.querySelectorAll("li[data-region='Online only']");
     for (var i = 0; i < allStores.length; i++) {
       allStores[i].style.display = "none";
     }
@@ -50,8 +51,11 @@ class StoreList extends React.Component {
       for (var i = 0; i < southIslandStores.length; i++) {
         southIslandStores[i].style.display = "block";
       } 
+    } else if (region === "OnlineOnly") {
+      for (var i = 0; i < onlineOnlyStores.length; i++) {
+        onlineOnlyStores[i].style.display = "block";
+      } 
     }
-
   };
 
   render() {
@@ -71,6 +75,7 @@ class StoreList extends React.Component {
             <option value="CentralNorth">Central North Island</option>
             <option value="Wellington">Wellington</option>
             <option value="SouthIsland">South Island</option>
+            <option value="OnlineOnly">Online Only</option>
           </select>
         </div>
       </div>

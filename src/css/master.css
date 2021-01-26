@@ -43,6 +43,12 @@ footer {
   margin: 0;
 }
 
+@media (max-width: 767px) {
+  .store-list h2 {
+    margin-bottom: 10px;
+  }
+}
+
 .store {
   overflow: hidden;
   background: #eee;
@@ -70,7 +76,7 @@ footer {
   margin-bottom: 10px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .store {
     width: 100%;
     margin-right: 0;
@@ -81,6 +87,12 @@ footer {
 nav {
   float: right;
   margin-top: 20px;
+}
+
+@media (max-width: 767px) {
+  nav {
+    float: none;
+  }
 }
 
 nav a {
@@ -100,6 +112,13 @@ nav a.active {
   margin-left: -15px;
   margin-top: -15px;
   border: none;
+}
+
+@media (max-width: 767px) {
+  .btn-fav {
+    float: right;
+    margin-right: 15px;
+  }
 }
 
 .btn-fav.addfav {
@@ -149,8 +168,20 @@ nav a.active {
   margin-bottom: 50px;
 }
 
+@media (max-width: 767px) {
+  .content {
+    margin-bottom: 30px;
+  }
+}
+
 .store-map {
   margin-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+  .store-map {
+    margin-bottom: 0;
+  }
 }
 
 .region-selector {
@@ -163,6 +194,10 @@ nav a.active {
 
 .advert {
   clear: both;
+}
+
+.advert img {
+  width: 100%;
 }
 
 .store-edit {
@@ -187,4 +222,57 @@ label {
   float: right;
   display: inline;
   margin-right: 20px;
+}
+
+@media (max-width: 767px) {
+  .filter-container {
+    display: block;
+    clear: both;
+    float: none;
+    margin-right: 0;
+  }
+
+  .store-details a {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 320px) {
+  .store-details {
+    margin-left: -15px;
+  }
+
+  .btn-fav {
+    margin-right: -5px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .store {
+    position: relative;
+    min-height: 378px;
+  }
+  .store .col-sm-1 {
+    position: absolute;
+    top: 45px;
+    right: 15px;
+  }
+  .store-details {
+    white-space: nowrap;
+    clear: both;
+  }
+  .store img {
+    width: 175px;
+    height: 175px;
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1199px) {
+  .store {
+    min-height: 282px;
+  }
+  .store-details {
+    margin-left: -15px;
+  }
 }
