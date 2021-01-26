@@ -17,9 +17,12 @@ class StoreList extends React.Component {
   };
 
   updateRegion = (region) => {
-    const allStores = document.getElementsByTagName("li");
-    const northlandStores = document.querySelectorAll("li[data-region='Northland']");
-    const aucklandStores = document.querySelectorAll("li[data-region='Auckland']");
+    const allStores = document.getElementsByTagName("li"),
+    northlandStores = document.querySelectorAll("li[data-region='Northland']"),
+    aucklandStores = document.querySelectorAll("li[data-region='Auckland']"),
+    centralNorthStores = document.querySelectorAll("li[data-region='Central North Island']"),
+    wellingtonStores = document.querySelectorAll("li[data-region='Wellington']"),
+    southIslandStores = document.querySelectorAll("li[data-region='South Island']");
     for (var i = 0; i < allStores.length; i++) {
       allStores[i].style.display = "none";
     }
@@ -35,33 +38,21 @@ class StoreList extends React.Component {
       for (var i = 0; i < aucklandStores.length; i++) {
         aucklandStores[i].style.display = "block";
       }
-      
     } else if (region === "CentralNorth") {
-      
+      for (var i = 0; i < centralNorthStores.length; i++) {
+        centralNorthStores[i].style.display = "block";
+      }  
     } else if (region === "Wellington") {
-      
+      for (var i = 0; i < wellingtonStores.length; i++) {
+        wellingtonStores[i].style.display = "block";
+      }  
     } else if (region === "SouthIsland") {
-     
+      for (var i = 0; i < southIslandStores.length; i++) {
+        southIslandStores[i].style.display = "block";
+      } 
     }
 
-    setTimeout(
-      () => this.reloadCss(), 
-      3000
-    );
   };
-
-  reloadCss = () => {
-    const links = document.getElementsByTagName("link");
-
-    for (var x in links) {
-        var link = links[x];
-
-        if (link.getAttribute("type").indexOf("css") > -1) {
-            link.href = link.href + "?id=" + new Date().getMilliseconds();
-        }
-    }
-  };
-
 
   render() {
     return (

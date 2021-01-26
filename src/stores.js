@@ -314,7 +314,7 @@ const stores = {
   },
   store27: {
     name: "Record Roundabout",
-    address1: "Building 4, The Historic Village",
+    address1: "Historic Village",
     address2: "159 Seventeenth Avenue",
     address3: "Tauranga",
     lat: -37.7050809,
