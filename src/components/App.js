@@ -80,7 +80,6 @@ class App extends React.Component {
   };
 
   deleteFavourite = (key) => {
-    console.log(key);
     const favourites = { ...this.state.favourites };
     delete favourites[key];
     this.setState({
@@ -136,6 +135,7 @@ class App extends React.Component {
                 {...props}
                 stores={this.state.stores}
                 addToFavourites={this.addToFavourites}
+                favourites={this.state.favourites}
               />
             )}
           />

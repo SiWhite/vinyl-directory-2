@@ -3,6 +3,7 @@ import Header from "./Header";
 import Intro from "./Intro";
 import Adverts from "./Adverts";
 import Footer from "./Footer";
+import Store from "./Store";
 
 class Favourites extends React.Component {
   goToDashboard = (event) => {
@@ -18,26 +19,14 @@ class Favourites extends React.Component {
     const fav = this.props.stores[key];
     if (!fav) return null;
     return (
-      <li key={key} index={key}>
-        <img src={fav.image} alt={fav.name} />
-        <h3 className="store__name">{fav.name}</h3>
-        <address>
-          {fav.address1}
-          <br />
-          {fav.address2}
-          <br />
-          {fav.address3}
-        </address>
-        <br />
-        <a href={fav.url}>Visit website</a>
-        <button
-          onClick={() => {
-            this.props.deleteFavourite(key);
-          }}
-        >
-          Delete from favourites
-        </button>
-      </li>
+    <Store
+      key={key}
+      index={key}
+      details={this.props.stores[key]}
+      addToFavourites={this.props.addToFavourites}
+      favourites={this.props.favourites}
+      deleteFavourite={this.props.deleteFavourite}
+    />
     );
   };
   render() {

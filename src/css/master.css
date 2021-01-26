@@ -33,6 +33,16 @@ footer {
   padding: 20px 0 10px;
 }
 
+.stores {
+  clear: both;
+  margin-top: 20px;
+}
+
+.store-list h2 {
+  display: inline-block;
+  margin: 0;
+}
+
 .store {
   overflow: hidden;
   background: #eee;
@@ -48,12 +58,16 @@ footer {
   width: 150px;
   height: 150px;
   float: left;
-  margin: 0 15px 15px 0;
+  margin: 0;
 }
 
 .store h3 {
   padding: 0;
   margin: 0 0 10px 0;
+}
+
+.store address {
+  margin-bottom: 10px;
 }
 
 @media (max-width: 768px) {
@@ -85,15 +99,37 @@ nav a.active {
 }
 
 .btn-fav {
-  background: url("/images/fav.png") no-repeat center;
-  background-size: cover;
   width: 30px;
   height: 30px;
-  appearance: none;
+  margin-left: -15px;
+  margin-top: -15px;
   border: none;
-  position: absolute;
-  top: 15px;
-  right: 15px;
+}
+
+.btn-fav.addfav {
+  background: url("/images/addfav.png") no-repeat center;
+  background-size: cover;
+}
+
+.btn-fav.addfav:hover {
+  background: url("/images/addfav--hover.png") no-repeat center;
+  background-size: cover;
+}
+
+.btn-fav.isfav {
+  background: url("/images/isfav.png") no-repeat center;
+  background-size: cover;
+  cursor: default !important;
+}
+
+.btn-fav.removefav {
+  background: url("/images/removefav.png") no-repeat center;
+  background-size: cover;
+}
+
+.btn-fav.removefav:hover {
+  background: url("/images/removefav--hover.png") no-repeat center;
+  background-size: cover;
 }
 
 .btn-fav:hover {
@@ -122,5 +158,36 @@ nav a.active {
 }
 
 .region-selector {
+  font-size: 1.25em;
+}
+
+.store-map .region-selector {
   font-size: 1.5em;
+}
+
+.advert {
+  clear: both;
+}
+
+.store-edit {
+  margin-bottom: 10px;
+}
+
+.store-edit input,
+.store-edit button {
+  width: 9%;
+  margin-right: 1%;
+}
+.btn-logout {
+  margin-top: -15px;
+  margin-bottom: 40px;
+}
+
+label {
+  font-size: 1.25em;
+}
+
+.filter-container {
+  float: right;
+  display: inline;
 }
