@@ -31,34 +31,34 @@ function createKey(length) {
 class StoreMap extends React.Component {
   state = {
     region: "All",
-    center: { lat: -41.2932786, lng: 174.7837615 },
+    center: { lat: parseFloat(-41.2932786), lng: parseFloat(174.7837615) },
     zoom: 5,
   };
   regions = [
     {
       All: {
-        lat: -41.3562773,
-        lng: 174.4775412,
+        lat: parseFloat(-41.3562773),
+        lng: parseFloat(174.4775412),
       },
       Northland: {
-        lat: -35.4627936,
-        lng: 173.8409633,
+        lat: parseFloat(-35.4627936),
+        lng: parseFloat(173.8409633),
       },
       Auckland: {
-        lat: -36.8621432,
-        lng: 174.5846066,
+        lat: parseFloat(-36.8621432),
+        lng: parseFloat(174.5846066),
       },
       CentralNorth: {
-        lat: -39.2791262,
-        lng: 175.9277365,
+        lat: parseFloat(-39.2791262),
+        lng: parseFloat(175.9277365),
       },
       Wellington: {
-        lat: -41.2442196,
-        lng: 174.6916437,
+        lat: parseFloat(-41.2442196),
+        lng: parseFloat(174.6916437),
       },
       SouthIsland: {
-        lat: -43.3372441,
-        lng: 170.0830099,
+        lat: parseFloat(-43.3372441),
+        lng: parseFloat(170.0830099),
       },
     },
   ];
@@ -134,8 +134,8 @@ class StoreMap extends React.Component {
             url: this.props.stores[key].url,
             image: this.props.stores[key].image,
             location: {
-              lat: this.props.stores[key].lat,
-              lng: this.props.stores[key].lng,
+              lat: parseFloat(this.props.stores[key].lat),
+              lng: parseFloat(this.props.stores[key].lng),
             },
           };
           stores.push(obj);
