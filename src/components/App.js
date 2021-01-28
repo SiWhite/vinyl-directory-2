@@ -1,15 +1,19 @@
 import React from "react";
+import ReactGA from 'react-ga';
 import firebase from "firebase";
 import StoreMap from "./StoreMap";
 import StoreList from "./StoreList";
 import Dashboard from "./Dashboard";
 import Favourites from "./Favourites";
 import NotFound from "./NotFound";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import stores from "../stores";
 import base, { firebaseApp } from "../base";
 import '../css/bootstrap.min.css';
 import '../css/master.css';
+
+//Unique Google Analytics tracking number
+ReactGA.initialize('G-C0S3BFM953');
 
 class App extends React.Component {
   state = {
@@ -20,6 +24,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
     const localStorageRef = localStorage.getItem("favourites");
     if (localStorageRef) {
       this.setState({
@@ -40,6 +45,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
+    ReactGA.pageview(window.location.pathname + window.location.search);
     localStorage.setItem("favourites", JSON.stringify(this.state.favourites));
   }
 
@@ -176,4 +182,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);
