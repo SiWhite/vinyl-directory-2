@@ -970,6 +970,18 @@ const stores = {
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
     region: "Wellington",
   },
+  store84: {
+    name: "Dusty Crates",
+    address1: null,
+    address2: null,
+    address3: null,
+    lat: null,
+    lng: null,
+    phone: null,
+    url: "https://www.dustycrates.co.nz/",
+    image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
+    region: "Online only",
+  },
 };
 
 export default stores;
