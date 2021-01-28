@@ -13,7 +13,7 @@ import '../css/bootstrap.min.css';
 import '../css/master.css';
 
 //Unique Google Analytics tracking number
-ReactGA.initialize('G-C0S3BFM953');
+ReactGA.initialize('UA-188411092-1');
 
 class App extends React.Component {
   state = {
