@@ -32,7 +32,7 @@ class Store extends React.Component {
             </address>
             {phone && <a href={`tel:${phone.replace(/\s/g, "")}`}>{phone}</a>}
             <br />
-            {url && <a href={url}>Visit website</a>}
+            {url && <a href={url} target="_blank" rel="noopener noreferrer">Visit website</a>}
           </div>
           <br />
           <div className="col-sm-1">

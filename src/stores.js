@@ -334,6 +334,7 @@ const stores = {
     phone: "(07) 572 1346",
     url: "http://www.mtbookworm.co.nz/",
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
+    region: "Central North Island",
   },
   store29: {
     name: "My Music Taupo",
@@ -371,7 +372,7 @@ const stores = {
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
     region: "Central North Island",
   },
-  store31: {
+  store85: {
     name: "Chadz Antiques",
     address1: "50 Liardet St",
     address2: "New Plymouth",
@@ -490,6 +491,7 @@ const stores = {
     phone: null,
     url: "https://www.facebook.com/pg/ulo.nz/",
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
+    region: "Central North Island",
   },
   store41: {
     name: "The Spellbound Wax Company",
@@ -525,6 +527,7 @@ const stores = {
     phone: "027 617 2235",
     url: "https://www.facebook.com/xanadubookexchange/",
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
+    region: "Central North Island",
   },
   store44: {
     name: "David N White Gallery",
@@ -789,6 +792,7 @@ const stores = {
     phone: "(03) 474 9394",
     url: "http://relicsmusic.co.nz/",
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
+    region: "South Island",
   },
   store68: {
     name: "Taste Merchants",

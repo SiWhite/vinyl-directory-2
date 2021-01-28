@@ -24,36 +24,36 @@ class StoreList extends React.Component {
     wellingtonStores = document.querySelectorAll("li[data-region='Wellington']"),
     southIslandStores = document.querySelectorAll("li[data-region='South Island']"),
     onlineOnlyStores = document.querySelectorAll("li[data-region='Online only']");
-    for (var i = 0; i < allStores.length; i++) {
-      allStores[i].style.display = "none";
+    for (var h = 0; h < allStores.length; h++) {
+      allStores[h].style.display = "none";
     }
     if (region === "All") {
       for (var i = 0; i < allStores.length; i++) {
         allStores[i].style.display = "block";
       }
     } else if (region === "Northland") {
-      for (var i = 0; i < northlandStores.length; i++) {
-        northlandStores[i].style.display = "block";
+      for (var j = 0; j < northlandStores.length; j++) {
+        northlandStores[j].style.display = "block";
       }
     } else if (region === "Auckland") {
-      for (var i = 0; i < aucklandStores.length; i++) {
-        aucklandStores[i].style.display = "block";
+      for (var k = 0; k < aucklandStores.length; k++) {
+        aucklandStores[k].style.display = "block";
       }
     } else if (region === "CentralNorth") {
-      for (var i = 0; i < centralNorthStores.length; i++) {
-        centralNorthStores[i].style.display = "block";
+      for (var l = 0; l < centralNorthStores.length; l++) {
+        centralNorthStores[l].style.display = "block";
       }  
     } else if (region === "Wellington") {
-      for (var i = 0; i < wellingtonStores.length; i++) {
-        wellingtonStores[i].style.display = "block";
+      for (var m = 0; m < wellingtonStores.length; m++) {
+        wellingtonStores[m].style.display = "block";
       }  
     } else if (region === "SouthIsland") {
-      for (var i = 0; i < southIslandStores.length; i++) {
-        southIslandStores[i].style.display = "block";
+      for (var n = 0; n < southIslandStores.length; n++) {
+        southIslandStores[n].style.display = "block";
       } 
     } else if (region === "OnlineOnly") {
-      for (var i = 0; i < onlineOnlyStores.length; i++) {
-        onlineOnlyStores[i].style.display = "block";
+      for (var o = 0; o < onlineOnlyStores.length; o++) {
+        onlineOnlyStores[o].style.display = "block";
       } 
     }
   };

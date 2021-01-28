@@ -39,7 +39,7 @@ class Favourites extends React.Component {
           <Header title="Vinyl Directory" />
           <Intro insideFavs={true} />
           <h2>Favourites</h2>
-          {hasFavs ? <ul className="favourites">{favIds.map(this.renderFavourite)}</ul> : <p>You haven't added any favourites yet. Try adding some from the <a onClick={this.goToList}>list of stores</a>.</p>}
+          {hasFavs ? <ul className="favourites">{favIds.map(this.renderFavourite)}</ul> : <p>You haven't added any favourites yet. Try adding some from the <a href="/list">list of stores</a>.</p>}
         </div>
         <Adverts />
         <Footer />

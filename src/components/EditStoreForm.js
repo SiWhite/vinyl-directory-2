@@ -37,6 +37,12 @@ class EditStoreForm extends React.Component {
         />
         <input
           type="text"
+          name="region"
+          onChange={this.handleChange}
+          value={this.props.store.region}
+        />
+        <input
+          type="text"
           name="lat"
           onChange={this.handleChange}
           value={this.props.store.lat}
@@ -66,7 +72,7 @@ class EditStoreForm extends React.Component {
           value={this.props.store.image}
         />
         <button onClick={() => this.props.deleteStore(this.props.index)}>
-          Delete store
+          Delete
         </button>
       </div>
     );

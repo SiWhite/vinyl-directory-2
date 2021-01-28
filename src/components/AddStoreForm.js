@@ -15,6 +15,7 @@ class AddStoreForm extends React.Component {
   phoneRef = React.createRef();
   urlRef = React.createRef();
   imageRef = React.createRef();
+  regionRef = React.createRef();
 
   handleChange(field, e) {
     let fields = this.state.fields;
@@ -54,7 +55,7 @@ class AddStoreForm extends React.Component {
     }
 
     if (typeof fields["lat"] !== "undefined") {
-      if (!fields["lat"].match(/^\d*\.?\d*$/)) {
+      if (!fields["lat"].match(/^-?\d*\.?\d*$/)) {
         formIsValid = false;
         errors["lat"] = "Only numbers";
       }
@@ -66,7 +67,7 @@ class AddStoreForm extends React.Component {
     }
 
     if (typeof fields["lng"] !== "undefined") {
-      if (!fields["lng"].match(/^\d*\.?\d*$/)) {
+      if (!fields["lng"].match(/^-?\d*\.?\d*$/)) {
         formIsValid = false;
         errors["lng"] = "Only numbers";
       }
@@ -141,6 +142,7 @@ class AddStoreForm extends React.Component {
       phone: this.phoneRef.current.value,
       urlRef: this.urlRef.current.value,
       image: this.imageRef.current.value,
+      region: this.regionRef.current.value,
     };
     this.props.addStore(store);
   };
@@ -182,6 +184,14 @@ class AddStoreForm extends React.Component {
         <span className="error">{this.state.errors["address3"]}</span>
         <input
           type="text"
+          ref={this.regionRef}
+          name="region"
+          placeholder="region"
+          onChange={this.handleChange.bind(this, "region")}
+        />
+        <span className="error">{this.state.errors["region"]}</span>
+        <input
+          type="text"
           ref={this.latRef}
           name="lat"
           placeholder="latitude"
@@ -220,7 +230,7 @@ class AddStoreForm extends React.Component {
           onChange={this.handleChange.bind(this, "image")}
         />
         <span className="error">{this.state.errors["image"]}</span>
-        <button type="submit">Add Store</button>
+        <button type="submit">Add</button>
       </form>
     );
   }
