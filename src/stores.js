@@ -996,7 +996,7 @@ const stores = {
     phone: "021 0266 1713",
     url: "https://www.facebook.com/RivertoneRecordsNZ/",
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
-    region: "Southland",
+    region: "South Island",
   },
 };
 
