@@ -986,6 +986,18 @@ const stores = {
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
     region: "Online only",
   },
+  store86: {
+    name: "Rivertone Records",
+    address1: "130 Palmerston St",
+    address2: "Riverton",
+    address3: "9822",
+    lat: parseFloat(-46.3505291),
+    lng: parseFloat(168.0155802),
+    phone: "021 0266 1713",
+    url: "https://www.facebook.com/RivertoneRecordsNZ/",
+    image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
+    region: "Southland",
+  },
 };
 
 export default stores;
