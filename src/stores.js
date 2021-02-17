@@ -998,6 +998,18 @@ const stores = {
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
     region: "South Island",
   },
+  store87: {
+    name: "Pop Goes the Bookshop",
+    address1: "410 Grey St",
+    address2: "Hamilton",
+    address3: "3216",
+    lat: parseFloat(-37.7923215),
+    lng: parseFloat(175.2932369),
+    phone: null,
+    url: "https://www.facebook.com/Pop-goes-the-bookshop-Hamilton-341756297256626/",
+    image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
+    region: "Central North Island",
+  },
 };
 
 export default stores;
