@@ -1010,6 +1010,18 @@ const stores = {
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
     region: "Central North Island",
   },
+  store88: {
+    name: "Flying Nun Records",
+    address1: "154a Riddiford St",
+    address2: "Newtown",
+    address3: "Wellington",
+    lat: parseFloat(-41.313197),
+    lng: parseFloat(174.7794457),
+    phone: null,
+    url: null,
+    image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
+    region: "Wellington",
+  },
 };
 
 export default stores;
