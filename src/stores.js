@@ -673,18 +673,6 @@ const stores = {
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
     region: "South Island",
   },
-  store56: {
-    name: "The Vintage Room",
-    address1: "Aranui Rd",
-    address2: "Mapua",
-    address3: "7173",
-    lat: parseFloat(-41.2526833),
-    lng: parseFloat(173.094892),
-    phone: "021 228 8339",
-    url: null,
-    image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
-    region: "South Island",
-  },
   store58: {
     name: "On The Front Lawn Records",
     address1: "159 Sale Street",
@@ -1021,6 +1009,18 @@ const stores = {
     url: null,
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
     region: "Wellington",
+  },
+  store89: {
+    name: "The Vintage Room",
+    address1: "Aranui Road, Māpua",
+    address2: "Māpua",
+    address3: "7173",
+    lat: parseFloat(-41.2533101),
+    lng: parseFloat(173.0954557),
+    phone: "021 228 8339",
+    url: "https://www.thevintageroom.co.nz",
+    image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
+    region: "South Island",
   },
 };
 
