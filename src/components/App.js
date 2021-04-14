@@ -11,7 +11,6 @@ import stores from "../stores";
 import base, { firebaseApp } from "../base";
 import '../css/bootstrap.min.css';
 import '../css/master.css';
-import { MetaTags } from "react-meta-tags";
 
 //Unique Google Analytics tracking number
 ReactGA.initialize('UA-188411092-1');
