@@ -74,7 +74,7 @@ const stores = {
   },
   store7: {
     name: "Alien Records & CDs",
-    address1: "9 Veronica St",
+    address1: "2/9 Veronica St",
     address2: "New Lynn",
     address3: "Auckland 0600",
     lat: parseFloat(-36.9075758),
