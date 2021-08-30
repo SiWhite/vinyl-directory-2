@@ -898,7 +898,7 @@ const stores = {
     lat: null,
     lng: null,
     phone: null,
-    url: "http://www.ddmdesign.co.nz/pinenut-records-1/",
+    url: "https://www.discogs.com/seller/EHKHAZ/profile",
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
     region: "Online only",
   },
@@ -1021,6 +1021,18 @@ const stores = {
     url: "https://www.thevintageroom.co.nz",
     image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
     region: "South Island",
+  },
+  store90: {
+    name: "Spellbound Wax Company",
+    address1: null,
+    address2: null,
+    address3: null,
+    lat: null,
+    lng: null,
+    phone: null,
+    url: "https://spellboundrecords.net/shop/",
+    image: "https://vinyl-dir.s3-ap-southeast-2.amazonaws.com/store-placeholder.jpg",
+    region: "Online only",
   },
 };
 
