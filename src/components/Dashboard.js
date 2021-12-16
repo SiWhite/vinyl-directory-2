@@ -7,17 +7,17 @@ import Login from "./Login";
 class Dashboard extends React.Component {
   render() {
     const logout = <button className="btn-logout" onClick={this.props.logout}>Log out</button>;
-    if (!this.props.uid) {
-      return <Login authenticate={this.props.authenticate} />;
-    }
-    if (this.props.uid !== this.props.owner) {
-      return (
-        <div className="dashboard">
-          <h1>Sorry you are not authorised to view this page</h1>
-          {logout}
-        </div>
-      );
-    }
+    // if (!this.props.uid) {
+    //   return <Login authenticate={this.props.authenticate} />;
+    // }
+    // if (this.props.uid !== this.props.owner) {
+    //   return (
+    //     <div className="dashboard">
+    //       <h1>Sorry you are not authorised to view this page</h1>
+    //       {logout}
+    //     </div>
+    //   );
+    // }
     return (
       <div className="container">
         <div className="dashboard col-sm-12">

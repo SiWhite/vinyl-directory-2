@@ -39,9 +39,9 @@ class App extends React.Component {
       context: this,
       state: "owner",
     });
-    firebase.auth().onAuthStateChanged((user) => {
-      this.authHandler({ user });
-    });
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   this.authHandler({ user });
+    // });
   }
 
   componentDidUpdate() {
@@ -93,25 +93,25 @@ class App extends React.Component {
     });
   };
 
-  authenticate = (provider) => {
-    const authProvider = new firebase.auth.FacebookAuthProvider();
-    firebaseApp.auth().signInWithPopup(authProvider).then(this.authHandler);
-  };
+  // authenticate = (provider) => {
+  //   const authProvider = new firebase.auth.FacebookAuthProvider();
+  //   firebaseApp.auth().signInWithPopup(authProvider).then(this.authHandler);
+  // };
 
-  authHandler = async (authData) => {
-    const store = await base.fetch("/", { context: this });
-    if (!store.owner) {
-      await base.post(`/owner`,{
-        data: authData.user.uid
-      })
-    }
-    if (authData.user) {
-      this.setState({
-        uid: authData.user.uid,
-        owner: store.owner,
-      });
-    }
-  };
+  // authHandler = async (authData) => {
+  //   const store = await base.fetch("/", { context: this });
+  //   if (!store.owner) {
+  //     await base.post(`/owner`,{
+  //       data: authData.user.uid
+  //     })
+  //   }
+  //   if (authData.user) {
+  //     this.setState({
+  //       uid: authData.user.uid,
+  //       owner: store.owner,
+  //     });
+  //   }
+  // };
 
   logout = async () => {
     await firebase.auth().signOut();
@@ -158,7 +158,7 @@ class App extends React.Component {
                 stores={this.state.stores}
                 uid={this.state.uid}
                 logout={this.logout}
-                authenticate={this.authenticate}
+                //authenticate={this.authenticate}
                 owner={this.state.owner}
               />
             )}
