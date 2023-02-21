@@ -1,11 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Header from "./Header";
+import FeaturedStore from "./FeaturedStore";
 import Intro from "./Intro";
 import Adverts from "./Adverts";
 import Footer from "./Footer";
 import MarkerWithInfoWindow from "./MarkerWithInfoWindow";
 import { GoogleMap, LoadScript, MarkerClusterer } from "@react-google-maps/api";
+import Store from "./Store";
 
 const mapContainerStyle = {
   height: "500px",
@@ -123,6 +125,17 @@ class StoreMap extends React.Component {
       <div className="container">
         <Header title="Vinyl Directory" />
         <Intro insideMap={true}/>
+        <ul className="stores">
+          {Object.keys(this.props.stores).map((key) => (
+            <FeaturedStore
+              key={key}
+              index={key}
+              details={this.props.stores[key]}
+              addToFavourites={this.props.addToFavourites}
+              favourites={this.props.favourites}
+            />
+          ))}
+        </ul>
       <div className="store-map">
         {Object.keys(this.props.stores).forEach((key) => {
           const obj = {

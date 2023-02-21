@@ -11,6 +11,7 @@ class Store extends React.Component {
       phone,
       url,
       image,
+      isFeatured,
       region
     } = this.props.details;
     const index = this.props.index.toString();
@@ -36,8 +37,8 @@ class Store extends React.Component {
           </div>
           <br />
           <div className="col-sm-1">
-          {isInList ? 
-          isFav ? <button className="btn-fav isfav" disabled></button> : <button className="btn-fav addfav" title="Add to favourites" onClick={() => this.props.addToFavourites(this.props.index)}></button> : 
+          {isInList ?
+          isFav ? <button className="btn-fav isfav" disabled></button> : <button className="btn-fav addfav" title="Add to favourites" onClick={() => this.props.addToFavourites(this.props.index)}></button> :
           <button className="btn-fav removefav" title="Remove from favourites" onClick={() => this.props.deleteFavourite(this.props.index)}></button>
           }
          </div>

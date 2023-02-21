@@ -60,11 +60,23 @@ footer {
   padding: 15px;
 }
 
+.store--featured {
+  width: 100%;
+  padding: 0 50px;
+  margin-bottom: 50px;
+}
+
 .store img {
   width: 150px;
   height: 150px;
   float: left;
   margin: 0;
+}
+
+.store--featured img {
+  width: 33%;
+  height: auto;
+  padding: 0 25px 25px 0;
 }
 
 .store h3 {
