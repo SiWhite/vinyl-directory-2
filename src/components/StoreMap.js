@@ -125,17 +125,17 @@ class StoreMap extends React.Component {
       <div className="container">
         <Header title="Vinyl Directory" />
         <Intro insideMap={true}/>
-        {/*<ul className="stores">*/}
-        {/*  {Object.keys(this.props.stores).map((key) => (*/}
-        {/*    <FeaturedStore*/}
-        {/*      key={key}*/}
-        {/*      index={key}*/}
-        {/*      details={this.props.stores[key]}*/}
-        {/*      addToFavourites={this.props.addToFavourites}*/}
-        {/*      favourites={this.props.favourites}*/}
-        {/*    />*/}
-        {/*  ))}*/}
-        {/*</ul>*/}
+        <ul className="stores">
+          {Object.keys(this.props.stores).map((key) => (
+            <FeaturedStore
+              key={key}
+              index={key}
+              details={this.props.stores[key]}
+              addToFavourites={this.props.addToFavourites}
+              favourites={this.props.favourites}
+            />
+          ))}
+        </ul>
       <div className="store-map">
         {Object.keys(this.props.stores).forEach((key) => {
           const obj = {

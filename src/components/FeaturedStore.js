@@ -8,11 +8,13 @@ class FeaturedStore extends React.Component {
       address1,
       address2,
       address3,
+        facebook,
+        instagram,
       phone,
       url,
-      image,
       isFeatured,
       featuredText,
+      featuredImageUrl,
       region
     } = this.props.details;
     return (
@@ -20,10 +22,14 @@ class FeaturedStore extends React.Component {
         {isFeatured &&
         <li className="store store--featured col-sm-12" data-region={region}>
           <div className="row">
-            <h2>Featured store</h2>
-            <img src={image} alt={name} className=""/>
+            <h3>Featured store</h3>
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              <img src={featuredImageUrl} alt={name} className="image--featured"/>
+            </a>
             <div className="store-details">
-              <h3 className="store__name">{name}</h3>
+               <a href={url} target="_blank" rel="noopener noreferrer">
+                 <h2 className="store__name">{name}</h2>
+               </a>
               <address>
                 {address1}
                 <br/>
@@ -32,13 +38,28 @@ class FeaturedStore extends React.Component {
                 {address3}
               </address>
               {phone && <a href={`tel:${phone.replace(/\s/g, "")}`}>{phone}</a>}
-              <br/>
-              {url && <a href={url} target="_blank" rel="noopener noreferrer">Visit website</a>}
             </div>
-            <br/>
             {featuredText &&
               <div className="store-text"><p>{featuredText}</p></div>
             }
+            {url && <a href={url} target="_blank" rel="noopener noreferrer">Visit website</a>}
+            <br/>
+            <ul className="socials">
+              {facebook &&
+              <li>
+                <a href={facebook} target="_blank" rel="noopener noreferrer">
+                  <img src="https://vinyl-dir.s3.ap-southeast-2.amazonaws.com/fb.png" alt={name} />
+                </a>
+              </li>
+              }
+              {instagram &&
+              <li>
+                <a href={instagram} target="_blank" rel="noopener noreferrer">
+                  <img src="https://vinyl-dir.s3.ap-southeast-2.amazonaws.com/insta.png" alt={name} />
+                </a>
+              </li>
+              }
+            </ul>
           </div>
         </li>
     }
