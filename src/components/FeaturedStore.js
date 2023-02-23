@@ -20,7 +20,7 @@ class FeaturedStore extends React.Component {
     return (
         <>
         {isFeatured &&
-        <li className="store store--featured col-sm-12" data-region={region}>
+        <div className="store store--featured col-sm-12" data-region={region}>
           <div className="row">
             <h3>Featured store</h3>
             <a href={url} target="_blank" rel="noopener noreferrer">
@@ -61,7 +61,7 @@ class FeaturedStore extends React.Component {
               }
             </ul>
           </div>
-        </li>
+        </div>
     }
     </>
     );

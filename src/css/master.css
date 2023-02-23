@@ -62,9 +62,16 @@ footer {
 
 .store--featured {
   width: 100%;
-  padding: 0 50px;
+  padding: 25px 50px 0;
   margin-bottom: 50px;
   border-radius: 20px;
+}
+.carousel .slide {
+  text-align: left;
+}
+
+.carousel .control-dots .dot {
+ background: #337ab7;
 }
 
 .store img {
@@ -92,11 +99,10 @@ footer {
 .socials {
   list-style: none;
   margin: 20px 0;
-
 }
 
 .socials li img {
-  width: 24px;
+  width: 24px !important;
   height: auto;
   margin-bottom: 20px;
 }
@@ -110,7 +116,8 @@ footer {
     float: left;
   }
   .store--featured {
-    padding-bottom: 20px;
+    padding-bottom: 0px;
+    min-height: 850px;
   }
 
   .store--featured h3 {
@@ -119,6 +126,14 @@ footer {
 
   .store--featured img.image--featured {
     width: 100%;
+  }
+
+  .carousel.carousel-slider {
+    overflow: visible;
+  }
+
+  .control-dots {
+    margin-bottom: -15px !important;
   }
 }
 

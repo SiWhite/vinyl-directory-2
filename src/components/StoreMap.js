@@ -7,7 +7,8 @@ import Adverts from "./Adverts";
 import Footer from "./Footer";
 import MarkerWithInfoWindow from "./MarkerWithInfoWindow";
 import { GoogleMap, LoadScript, MarkerClusterer } from "@react-google-maps/api";
-import Store from "./Store";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 const mapContainerStyle = {
   height: "500px",
@@ -125,17 +126,50 @@ class StoreMap extends React.Component {
       <div className="container">
         <Header title="Vinyl Directory" />
         <Intro insideMap={true}/>
-        <ul className="stores">
-          {Object.keys(this.props.stores).map((key) => (
-            <FeaturedStore
-              key={key}
-              index={key}
-              details={this.props.stores[key]}
-              addToFavourites={this.props.addToFavourites}
-              favourites={this.props.favourites}
-            />
-          ))}
-        </ul>
+
+        <Carousel showStatus={false} autoPlay={true} interval={10000} showArrows={false}>
+                <div>
+                    {Object.keys(this.props.stores).map((key) => (
+                      <FeaturedStore
+                        key={key}
+                        index={key}
+                        details={this.props.stores[key]}
+                        addToFavourites={this.props.addToFavourites}
+                        favourites={this.props.favourites}
+                      />
+                    ))}
+                </div>
+                 <div>
+                     <div className="store store--featured col-sm-12">
+                        <div className="row">
+                            <h3>Featured store</h3>
+                            <img src="https://vinyl-dir.s3.ap-southeast-2.amazonaws.com/Vinylrecords2.jpg" alt="vinyl records" className="image--featured"/>
+                            <div className="store-details">
+                                <h2 className="store__name">Your store here</h2>
+                                <address>
+                                    Your address displays here, along with your phone number, website link and any social media accounts.
+                              </address>
+                                <div className="store-text">
+                                    <p>Reach record collectors across New Zealand and beyond by becoming a featured store here. Contact us at info@vinyldirectory.nz to enquire now.</p>
+                                </div>
+                                <a href="mailto:info@vinyldirectory.nz">Email info@vinyldirectory.nz</a>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                 <div>
+                    {Object.keys(this.props.stores).map((key) => (
+                      <FeaturedStore
+                        key={key}
+                        index={key}
+                        details={this.props.stores[key]}
+                        addToFavourites={this.props.addToFavourites}
+                        favourites={this.props.favourites}
+                      />
+                    ))}
+                </div>
+        </Carousel>
+
       <div className="store-map">
         {Object.keys(this.props.stores).forEach((key) => {
           const obj = {

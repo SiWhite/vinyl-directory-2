@@ -10,6 +10,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import stores from "../stores";
 import base, { firebaseApp } from "../base";
 import '../css/bootstrap.min.css';
+import '../css/carousel.min.css';
 import '../css/master.css';
 
 //Unique Google Analytics tracking number
