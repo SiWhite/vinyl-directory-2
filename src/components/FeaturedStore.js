@@ -30,13 +30,15 @@ class FeaturedStore extends React.Component {
                <a href={url} target="_blank" rel="noopener noreferrer">
                  <h2 className="store__name">{name}</h2>
                </a>
-              <address>
-                {address1}
-                <br/>
-                {address2}
-                <br/>
-                {address3}
-              </address>
+              {address1 &&
+                  <address>
+                    {address1}
+                    <br/>
+                    {address2}
+                    <br/>
+                    {address3}
+                  </address>
+              }
               {phone && <a href={`tel:${phone.replace(/\s/g, "")}`}>{phone}</a>}
             </div>
             {featuredText &&

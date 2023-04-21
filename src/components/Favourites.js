@@ -71,17 +71,6 @@ class Favourites extends React.Component {
                         </div>
                     </div>
                  </div>
-                 <div>
-                    {Object.keys(this.props.stores).map((key) => (
-                      <FeaturedStore
-                        key={key}
-                        index={key}
-                        details={this.props.stores[key]}
-                        addToFavourites={this.props.addToFavourites}
-                        favourites={this.props.favourites}
-                      />
-                    ))}
-                </div>
         </Carousel>
           <h2>Favourites</h2>
           {hasFavs ? <ul className="favourites">{favIds.map(this.renderFavourite)}</ul> : <p>You haven't added any favourites yet. Try adding some from the <a href="/list">list of stores</a>.</p>}

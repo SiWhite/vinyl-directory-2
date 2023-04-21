@@ -159,17 +159,6 @@ class StoreMap extends React.Component {
                     </div>
                 </div>
              </div>
-             <div>
-                {Object.keys(this.props.stores).map((key) => (
-                  <FeaturedStore
-                    key={key}
-                    index={key}
-                    details={this.props.stores[key]}
-                    addToFavourites={this.props.addToFavourites}
-                    favourites={this.props.favourites}
-                  />
-                ))}
-            </div>
         </Carousel>
       <div className="store-map">
         {Object.keys(this.props.stores).forEach((key) => {

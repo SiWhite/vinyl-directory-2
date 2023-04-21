@@ -98,17 +98,6 @@ class StoreList extends React.Component {
                         </div>
                     </div>
                  </div>
-                 <div>
-                    {Object.keys(this.props.stores).map((key) => (
-                      <FeaturedStore
-                        key={key}
-                        index={key}
-                        details={this.props.stores[key]}
-                        addToFavourites={this.props.addToFavourites}
-                        favourites={this.props.favourites}
-                      />
-                    ))}
-                </div>
         </Carousel>
         <div>
         <h2>Store List</h2>
