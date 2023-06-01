@@ -1,5 +1,5 @@
 import React from "react";
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga4";
 import firebase from "firebase";
 import StoreMap from "./StoreMap";
 import StoreList from "./StoreList";
@@ -14,7 +14,7 @@ import '../css/carousel.min.css';
 import '../css/master.css';
 
 //Unique Google Analytics tracking number
-ReactGA.initialize('UA-188411092-1');
+ReactGA.initialize('G-QHEWSX1XWQ');
 
 class App extends React.Component {
   state = {
@@ -25,7 +25,6 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    ReactGA.pageview(window.location.pathname + window.location.search);
     const localStorageRef = localStorage.getItem("favourites");
     if (localStorageRef) {
       this.setState({
@@ -46,7 +45,6 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    ReactGA.pageview(window.location.pathname + window.location.search);
     localStorage.setItem("favourites", JSON.stringify(this.state.favourites));
   }
 
