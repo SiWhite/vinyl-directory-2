@@ -117,7 +117,7 @@ footer {
   }
   .store--featured {
     padding-bottom: 0px;
-    min-height: 850px;
+    margin-bottom: 20px;
   }
 
   .store--featured h3 {
