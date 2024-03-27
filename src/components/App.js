@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import ReactGA from "react-ga4";
 import firebase from "firebase";
 import StoreMap from "./StoreMap";
@@ -44,12 +44,25 @@ class App extends React.Component {
     // });
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     localStorage.setItem("favourites", JSON.stringify(this.state.favourites));
+    // Check if route has changed
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      // Reload PayPal button on route change
+      this.loadPayPalButton();
+    }
   }
 
   componentWillUnmount() {
     base.removeBinding(this.ref);
+  }
+
+  loadPayPalButton() {
+    if (window.paypal && window.paypal.HostedButtons) {
+      window.paypal.HostedButtons({
+        hostedButtonId: "YPGXYXA2C8GYS"
+      }).render("#paypal-container-YPGXYXA2C8GYS");
+    }
   }
 
   addStore = (store) => {
