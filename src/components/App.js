@@ -12,6 +12,7 @@ import base, { firebaseApp } from "../base";
 import '../css/bootstrap.min.css';
 import '../css/carousel.min.css';
 import '../css/master.css';
+import { loadPayPalScript } from "../utils"; // Import the utility function
 
 //Unique Google Analytics tracking number
 ReactGA.initialize('G-QHEWSX1XWQ');
@@ -22,6 +23,7 @@ class App extends React.Component {
     favourites: {},
     uid: null,
     owner: null,
+    isPayPalScriptLoaded: false
   };
 
   componentDidMount() {
@@ -42,6 +44,11 @@ class App extends React.Component {
     // firebase.auth().onAuthStateChanged((user) => {
     //   this.authHandler({ user });
     // });
+
+    // Load PayPal script
+    loadPayPalScript(() => {
+      this.setState({ isPayPalScriptLoaded: true }, this.loadPayPalButton);
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -57,13 +64,16 @@ class App extends React.Component {
     base.removeBinding(this.ref);
   }
 
-  loadPayPalButton() {
-    if (window.paypal && window.paypal.HostedButtons) {
-      window.paypal.HostedButtons({
-        hostedButtonId: "YPGXYXA2C8GYS"
-      }).render("#paypal-container-YPGXYXA2C8GYS");
+  loadPayPalButton = () => {
+    if (this.state.isPayPalScriptLoaded && window.paypal && window.paypal.HostedButtons) {
+      const container = document.getElementById("paypal-container-YPGXYXA2C8GYS");
+      if (container) {
+        window.paypal.HostedButtons({
+          hostedButtonId: "YPGXYXA2C8GYS"
+        }).render("#paypal-container-YPGXYXA2C8GYS");
+      }
     }
-  }
+  };
 
   addStore = (store) => {
     const stores = { ...this.state.stores };
@@ -142,6 +152,7 @@ class App extends React.Component {
                 {...props}
                 stores={this.state.stores}
                 addToFavourites={this.addToFavourites}
+                isPayPalScriptLoaded={this.state.isPayPalScriptLoaded}
               />
             )}
           />
@@ -154,6 +165,7 @@ class App extends React.Component {
                 stores={this.state.stores}
                 addToFavourites={this.addToFavourites}
                 favourites={this.state.favourites}
+                isPayPalScriptLoaded={this.state.isPayPalScriptLoaded}
               />
             )}
           />
@@ -172,6 +184,7 @@ class App extends React.Component {
                 logout={this.logout}
                 //authenticate={this.authenticate}
                 owner={this.state.owner}
+                isPayPalScriptLoaded={this.state.isPayPalScriptLoaded}
               />
             )}
           />
@@ -184,6 +197,7 @@ class App extends React.Component {
                 stores={this.state.stores}
                 favourites={this.state.favourites}
                 deleteFavourite={this.deleteFavourite}
+                isPayPalScriptLoaded={this.state.isPayPalScriptLoaded}
               />
             )}
           />

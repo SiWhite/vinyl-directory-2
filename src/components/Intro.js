@@ -2,7 +2,33 @@ import React from "react";
 
 class Intro extends React.Component {
 
+    componentDidUpdate(prevProps) {
+    if (this.props.isPayPalScriptLoaded && !prevProps.isPayPalScriptLoaded) {
+      if (window.paypal && window.paypal.HostedButtons) {
+            window.paypal.HostedButtons({
+                hostedButtonId: "YPGXYXA2C8GYS"
+            }).render("#paypal-container-YPGXYXA2C8GYS");
+            }
+        }
+    }
+
+    componentDidMount() {
+    if (this.props.isPayPalScriptLoaded) {
+      if (window.paypal && window.paypal.HostedButtons) {
+        window.paypal.HostedButtons({
+          hostedButtonId: "YPGXYXA2C8GYS"
+        }).render("#paypal-container-YPGXYXA2C8GYS");
+      }
+    }
+  }
+
     render() {
+        const paypalButton = (
+          <div className="paypal-wrapper" style={{background: '#eee', padding: "10px 20px", borderRadius: "10px", marginBottom: "40px"}}>
+            <div id="paypal-container-YPGXYXA2C8GYS"></div>
+          </div>
+        );
+
         if (this.props.insideMap) {
             return (
                 <div style={{ display:  window.innerWidth <= 768 ? 'block' : 'flex'}}>
@@ -26,10 +52,7 @@ class Intro extends React.Component {
                                 href="mailto:simon@silentdesigns.co.nz">simon@silentdesigns.co.nz</a>.
                         </p>
                     </div>
-                    <div class="paypal-wrapper"
-                         style={{background: '#eee', padding: "10px 20px", borderRadius: "10px", marginBottom: "40px"}}>
-                        <div id="paypal-container-YPGXYXA2C8GYS"></div>
-                    </div>
+                    { paypalButton }
                 </div>
             )
         }
@@ -52,10 +75,7 @@ class Intro extends React.Component {
                                  href="mailto:simon@silentdesigns.co.nz">simon@silentdesigns.co.nz</a>.</p>
                          <p style={{fontSize: "1.25em"}}>Happy digging! :)</p>
                      </div>
-                     <div class="paypal-wrapper"
-                          style={{background: '#eee', padding: "10px 20px", borderRadius: "10px", marginBottom: "40px"}}>
-                        <div id="paypal-container-YPGXYXA2C8GYS"></div>
-                    </div>
+                     { paypalButton }
                  </div>
                 )
         }
@@ -74,14 +94,7 @@ class Intro extends React.Component {
                              remain here until you manually delete them or until your browser cookies are cleared.</p>
                          <p style={{fontSize: "1.25em"}}>Happy digging! :)</p>
                      </div>
-                     <div class="paypal-wrapper" style={{
-                         background: '#eee',
-                         padding: "10px 20px",
-                         borderRadius: "10px",
-                         marginBottom: "40px"
-                     }}>
-                         <div id="paypal-container-YPGXYXA2C8GYS"></div>
-                     </div>
+                     { paypalButton }
                  </div>
             )
         }
