@@ -23,9 +23,20 @@ class Intro extends React.Component {
   }
 
     render() {
+        const styleOverride = (
+        <style>
+          {`
+            .css-178qcrb {
+              max-width: none !important;
+            }
+          `}
+        </style>
+      );
+
         const paypalButton = (
-          <div className="paypal-wrapper" style={{background: '#eee', padding: "10px 20px", borderRadius: "10px", marginBottom: "40px"}}>
-            <div id="paypal-container-YPGXYXA2C8GYS"></div>
+          <div className="paypal-wrapper" style={{background: '#eee', width: "100%", padding: "10px 20px", borderRadius: "10px", marginBottom: "40px"}}>
+            {styleOverride}
+              <div id="paypal-container-YPGXYXA2C8GYS" style={{background: '#eee', width: "100%"}}></div>
           </div>
         );
 
@@ -33,7 +44,7 @@ class Intro extends React.Component {
             return (
                 <div style={{ display:  window.innerWidth <= 768 ? 'block' : 'flex'}}>
                     <div className="content" style={{
-                        width: window.innerWidth <= 768 ? '100%' : '70%',
+                        width: '100%',
                         marginRight: window.innerWidth <= 768 ? '0' : '5%'
                     }}>
                         <h2>Welcome to VinylDirectory.nz - your guide to independent kiwi vinyl record digging
@@ -52,7 +63,11 @@ class Intro extends React.Component {
                                 href="mailto:simon@silentdesigns.co.nz">simon@silentdesigns.co.nz</a>.
                         </p>
                     </div>
+                     <div className="content" style={{
+                        width: window.innerWidth <= 768 ? '100%' : '30%',
+                    }}>
                     { paypalButton }
+                     </div>
                 </div>
             )
         }
@@ -60,7 +75,6 @@ class Intro extends React.Component {
             return (
                  <div style={{ display:  window.innerWidth <= 768 ? 'block' : 'flex'}}>
                      <div className="content" style={{
-                         width: window.innerWidth <= 768 ? '100%' : '70%',
                          marginRight: window.innerWidth <= 768 ? '0' : '5%'
                      }}>
                          <h2>Welcome to VinylDirectory.nz - your guide to independent kiwi vinyl record digging
