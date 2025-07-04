@@ -12,9 +12,8 @@ import base, { firebaseApp } from "../base";
 import '../css/bootstrap.min.css';
 import '../css/carousel.min.css';
 import '../css/master.css';
-import { loadPayPalScript } from "../utils"; // Import the utility function
+import { loadPayPalScript } from "../utils";
 
-//Unique Google Analytics tracking number
 ReactGA.initialize('G-QHEWSX1XWQ');
 
 class App extends React.Component {
@@ -41,11 +40,12 @@ class App extends React.Component {
       context: this,
       state: "owner",
     });
-    // firebase.auth().onAuthStateChanged((user) => {
-    //   this.authHandler({ user });
-    // });
+     firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.authHandler({ user });
+      }
+    });
 
-    // Load PayPal script
     loadPayPalScript(() => {
       this.setState({ isPayPalScriptLoaded: true }, this.loadPayPalButton);
     });
@@ -53,15 +53,14 @@ class App extends React.Component {
 
   componentDidUpdate(prevProps) {
     localStorage.setItem("favourites", JSON.stringify(this.state.favourites));
-    // Check if route has changed
     if (this.props.location.pathname !== prevProps.location.pathname) {
-      // Reload PayPal button on route change
       this.loadPayPalButton();
     }
   }
 
   componentWillUnmount() {
-    base.removeBinding(this.ref);
+    base.removeBinding(this.refStores);
+    base.removeBinding(this.refOwner);
   }
 
   loadPayPalButton = () => {
@@ -115,25 +114,30 @@ class App extends React.Component {
     });
   };
 
-  // authenticate = (provider) => {
-  //   const authProvider = new firebase.auth.FacebookAuthProvider();
-  //   firebaseApp.auth().signInWithPopup(authProvider).then(this.authHandler);
-  // };
+  authenticate = (providerName) => {
+    let provider;
+    if (providerName === "facebook") {
+      provider = new firebase.auth.FacebookAuthProvider();
+    } else if (providerName === "google") {
+      provider = new firebase.auth.GoogleAuthProvider();
+    } else {
+      provider = new firebase.auth.FacebookAuthProvider(); // default
+    }
+    firebaseApp.auth().signInWithPopup(provider).then(this.authHandler);
+  };
 
-  // authHandler = async (authData) => {
-  //   const store = await base.fetch("/", { context: this });
-  //   if (!store.owner) {
-  //     await base.post(`/owner`,{
-  //       data: authData.user.uid
-  //     })
-  //   }
-  //   if (authData.user) {
-  //     this.setState({
-  //       uid: authData.user.uid,
-  //       owner: store.owner,
-  //     });
-  //   }
-  // };
+  authHandler = async (authData) => {
+    const store = await base.fetch("/", { context: this });
+    if (!store.owner) {
+      await base.post(`/owner`, {
+        data: authData.user.uid
+      });
+    }
+    this.setState({
+      uid: authData.user.uid,
+      owner: store.owner || authData.user.uid,
+    });
+  };
 
   logout = async () => {
     await firebase.auth().signOut();
@@ -182,7 +186,7 @@ class App extends React.Component {
                 stores={this.state.stores}
                 uid={this.state.uid}
                 logout={this.logout}
-                //authenticate={this.authenticate}
+                authenticate={this.authenticate}
                 owner={this.state.owner}
                 isPayPalScriptLoaded={this.state.isPayPalScriptLoaded}
               />

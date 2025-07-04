@@ -264,6 +264,27 @@ nav a.active {
 
 .advert {
   clear: both;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  gap: 2.5%;
+  flex-wrap: wrap;
+  clear: both;
+}
+
+.advert-item {
+  width: 48.75%;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .advert {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+  .advert-item {
+    width: 100% !important;
+  }
 }
 
 .advert img {
@@ -344,6 +365,32 @@ label {
   }
   .store-details {
     margin-left: -15px;
+  }
+}
+
+.intro-flex {
+  display: flex;
+}
+
+.intro-main {
+  width:50%;
+   margin-right: 20px;
+}
+
+.paypal-wrapper {
+   width:50%;
+}
+
+@media (max-width: 600px) {
+  .intro-flex {
+    flex-direction: column;
+  }
+  .intro-main {
+    width: 100%;
+    margin-right: 0;
+  }
+  .paypal-wrapper {
+    width: 100%;
   }
 }
 
