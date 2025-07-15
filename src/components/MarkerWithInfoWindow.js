@@ -1,112 +1,75 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { Marker, InfoWindow } from "@react-google-maps/api";
 import icon from '../assets/icon.png';
 
-class MarkerWithInfoWindow extends React.Component {
-  state = {
-    isMounted: false,
-    isOpen: false,
-    openWindow: null,
-  };
-  componentDidMount() {
-    this.setState({
-      isMounted: true,
-    });
+const createKey = (length) => {
+  let result = "";
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
   }
-  handleToggleOpen = (marker) => {
-    // this.closePreviousWindow();
-    this.setState({ openWindow: marker });
-    console.log("openWindow = ", this.state.openWindow.props.name);
-    this.setState({
-      isOpen: true,
-    });
-  };
+  return result;
+};
 
-  setOpenWindow = (marker) => {
-    this.closePreviousWindow(marker);
+const MarkerWithInfoWindow = (props) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-    console.log(marker);
-    console.log(this.state.openWindow);
-    // if (marker.state.isMounted) {
-    //   marker.props.isOpen = true;
-    //   console.log(marker.props.isOpen);
-    // }
-  };
-  closePreviousWindow = () => {
-    // if (this.state.openWindow) {
-    //   console.log("close ", this.state.openWindow.props.name);
-    // }
-  };
+  const handleToggleOpen = useCallback(() => {
+    setIsOpen(true);
+  }, []);
 
-  handleToggleClose = () => {
-    this.setState({
-      isOpen: false,
-    });
-  };
-  createKey(length) {
-    var result = "";
-    var characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
-  componentWillUnmount() {
-    this.setState({
-      isMounted: false,
-    });
-  }
+  const handleToggleClose = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
-  render() {
-    return (
-      <Marker
-        className="marker"
-        id={this.createKey(10)}
-        position={this.props.position}
-        clusterer={this.props.clusterer}
-        name={this.props.name}
-        image={this.props.image}
-        openWindow={this.props.openWindow}
-        onClick={(e) => this.handleToggleOpen(this)}
-        icon={{url: icon}}
-      >
-        {this.state.isOpen && (
-          <InfoWindow
-            onCloseClick={this.handleToggleClose}
-            optimized={false}
-            zIndex={99999999}
-          >
-            <div className="info-window">
-              <h2>{this.props.name}</h2>
-              <address>
-                {this.props.address1}
-                <br></br>
-                {this.props.address2}
-                <br></br>
-                {this.props.address3}
-                <br></br>
-              </address>
-              {this.props.phone && (
-                <a className="phone-link" href={"tel:" + this.props.phone}>{this.props.phone}</a>
-              )}
-              <br></br>
-              {this.props.url && (
-                <a
-                  href={this.props.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Visit website
-                </a>
-              )}
-            </div>
-          </InfoWindow>
-        )}
-      </Marker>
-    );
-  }
-}
+  return (
+    <Marker
+      className="marker"
+      id={createKey(10)}
+      position={props.position}
+      clusterer={props.clusterer}
+      name={props.name}
+      image={props.image}
+      openWindow={props.openWindow}
+      onClick={handleToggleOpen}
+      icon={{ url: icon }}
+    >
+      {isOpen && (
+        <InfoWindow
+          onCloseClick={handleToggleClose}
+          optimized={false}
+          zIndex={99999999}
+        >
+          <div className="info-window">
+            <h2>{props.name}</h2>
+            <address>
+              {props.address1}
+              <br />
+              {props.address2}
+              <br />
+              {props.address3}
+              <br />
+            </address>
+            {props.phone && (
+              <a className="phone-link" href={"tel:" + props.phone}>
+                {props.phone}
+              </a>
+            )}
+            <br />
+            {props.url && (
+              <a
+                href={props.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Visit website
+              </a>
+            )}
+          </div>
+        </InfoWindow>
+      )}
+    </Marker>
+  );
+};
 
 export default MarkerWithInfoWindow;

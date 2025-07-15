@@ -146,7 +146,11 @@ class StoreMap extends React.Component {
           };
           stores.push(obj);
         })}
-        <LoadScript googleMapsApiKey={process.env.REACT_APP_MAP_KEY}>
+        <LoadScript
+          googleMapsApiKey={process.env.REACT_APP_MAP_KEY}
+          libraries={["marker"]}
+          version="weekly"
+          >
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             zoom={this.state.zoom}

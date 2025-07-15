@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Header from "./Header";
 import AddStoreForm from "./AddStoreForm";
@@ -16,6 +16,7 @@ function Dashboard({
   addStore,
   loadStoresFromFile,
 }) {
+
   // Not logged in
   if (!uid) {
     return <Login authenticate={authenticate} />;

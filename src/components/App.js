@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import ReactGA from "react-ga4";
 import firebase from "firebase";
 import StoreMap from "./StoreMap";
@@ -6,8 +6,8 @@ import StoreList from "./StoreList";
 import Dashboard from "./Dashboard";
 import Favourites from "./Favourites";
 import NotFound from "./NotFound";
-import { Route, Switch, withRouter } from "react-router-dom";
-import stores from "../stores";
+import { Route, Switch, useLocation } from "react-router-dom";
+import storesData from "../stores";
 import base, { firebaseApp } from "../base";
 import '../css/bootstrap.min.css';
 import '../css/carousel.min.css';
@@ -16,55 +16,66 @@ import { loadPayPalScript } from "../utils";
 
 ReactGA.initialize('G-QHEWSX1XWQ');
 
-class App extends React.Component {
-  state = {
-    stores: {},
-    favourites: {},
-    uid: null,
-    owner: null,
-    isPayPalScriptLoaded: false
-  };
+const App = () => {
+  const [stores, setStores] = useState({});
+  const [favourites, setFavourites] = useState({});
+  const [uid, setUid] = useState(null);
+  const [owner, setOwner] = useState(null);
+  const [isPayPalScriptLoaded, setIsPayPalScriptLoaded] = useState(false);
+  const location = useLocation();
 
-  componentDidMount() {
+  const refStores = useRef(null);
+  const refOwner = useRef(null);
+
+  // Load favourites from localStorage
+  useEffect(() => {
     const localStorageRef = localStorage.getItem("favourites");
     if (localStorageRef) {
-      this.setState({
-        favourites: JSON.parse(localStorageRef),
-      });
+      setFavourites(JSON.parse(localStorageRef));
     }
-    this.ref = base.syncState(`/stores`, {
-      context: this,
-      state: "stores",
-    });
-    this.ref = base.syncState(`/owner`, {
-      context: this,
-      state: "owner",
-    });
-     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.authHandler({ user });
-      }
-    });
+  }, []);
 
-    loadPayPalScript(() => {
-      this.setState({ isPayPalScriptLoaded: true }, this.loadPayPalButton);
-    });
-  }
+  // Sync with Firebase (Rebase)
+  useEffect(() => {
+  firebase.database().ref('/stores').on('value', (snapshot) => {
+    setStores(snapshot.val() || {});
+  });
+  firebase.database().ref('/owner').on('value', (snapshot) => {
+    setOwner(snapshot.val() || null);
+  });
 
-  componentDidUpdate(prevProps) {
-    localStorage.setItem("favourites", JSON.stringify(this.state.favourites));
-    if (this.props.location.pathname !== prevProps.location.pathname) {
-      this.loadPayPalButton();
+  const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      authHandler({ user });
     }
-  }
+  });
 
-  componentWillUnmount() {
-    base.removeBinding(this.refStores);
-    base.removeBinding(this.refOwner);
-  }
+  loadPayPalScript(() => {
+    setIsPayPalScriptLoaded(true);
+    loadPayPalButton();
+  });
 
-  loadPayPalButton = () => {
-    if (this.state.isPayPalScriptLoaded && window.paypal && window.paypal.HostedButtons) {
+  return () => {
+    firebase.database().ref('/stores').off();
+    firebase.database().ref('/owner').off();
+    unsubscribe();
+  };
+  // eslint-disable-next-line
+}, []);
+
+  // Save favourites to localStorage
+  useEffect(() => {
+    localStorage.setItem("favourites", JSON.stringify(favourites));
+  }, [favourites]);
+
+  // Reload PayPal button on route change
+  useEffect(() => {
+    loadPayPalButton();
+    // eslint-disable-next-line
+  }, [location.pathname, isPayPalScriptLoaded]);
+
+  const loadPayPalButton = useCallback(() => {
+    if (isPayPalScriptLoaded && window.paypal && window.paypal.HostedButtons) {
       const container = document.getElementById("paypal-container-YPGXYXA2C8GYS");
       if (container) {
         window.paypal.HostedButtons({
@@ -72,144 +83,134 @@ class App extends React.Component {
         }).render("#paypal-container-YPGXYXA2C8GYS");
       }
     }
-  };
+  }, [isPayPalScriptLoaded]);
 
-  addStore = (store) => {
-    const stores = { ...this.state.stores };
-    stores[`store${Date.now()}`] = store;
-    this.setState({ stores });
-  };
-
-  updateStore = (key, updatedStore) => {
-    const stores = { ...this.state.stores };
-    stores[key] = updatedStore;
-    this.setState({ stores });
-  };
-
-  deleteStore = (key) => {
-    const stores = { ...this.state.stores };
-    stores[key] = null;
-    this.setState({ stores });
-  };
-
-  loadStoresFromFile = () => {
-    this.setState({
-      stores,
+  const addStore = useCallback((store) => {
+    setStores(prev => {
+      const updated = { ...prev };
+      updated[`store${Date.now()}`] = store;
+      return updated;
     });
-  };
+  }, []);
 
-  addToFavourites = (key) => {
-    const favourites = { ...this.state.favourites };
-    favourites[key] = 1;
-    this.setState({
-      favourites,
+  const updateStore = useCallback((key, updatedStore) => {
+    setStores(prev => {
+      const updated = { ...prev };
+      updated[key] = updatedStore;
+      return updated;
     });
-  };
+  }, []);
 
-  deleteFavourite = (key) => {
-    const favourites = { ...this.state.favourites };
-    delete favourites[key];
-    this.setState({
-      favourites,
+  const deleteStore = useCallback((key) => {
+    setStores(prev => {
+      const updated = { ...prev };
+      updated[key] = null;
+      return updated;
     });
-  };
+  }, []);
 
-  authenticate = (providerName) => {
-    let provider;
-    if (providerName === "facebook") {
-      provider = new firebase.auth.FacebookAuthProvider();
-    } else if (providerName === "google") {
-      provider = new firebase.auth.GoogleAuthProvider();
-    } else {
-      provider = new firebase.auth.FacebookAuthProvider(); // default
-    }
-    firebaseApp.auth().signInWithPopup(provider).then(this.authHandler);
-  };
+  const loadStoresFromFile = useCallback(() => {
+    setStores(storesData);
+  }, []);
 
-  authHandler = async (authData) => {
-    const store = await base.fetch("/", { context: this });
+  const addToFavourites = useCallback((key) => {
+    setFavourites(prev => ({ ...prev, [key]: 1 }));
+  }, []);
+
+  const deleteFavourite = useCallback((key) => {
+    setFavourites(prev => {
+      const updated = { ...prev };
+      delete updated[key];
+      return updated;
+    });
+  }, []);
+
+  const authenticate = useCallback(async (email, password) => {
+    const userCredential = await firebaseApp.auth().signInWithEmailAndPassword(email, password);
+    const authData = { user: userCredential.user };
+    await authHandler(authData);
+  }, [authHandler]);
+
+  const authHandler = useCallback(async (authData) => {
+    const store = await base.fetch("/", { context: {} });
     if (!store.owner) {
       await base.post(`/owner`, {
         data: authData.user.uid
       });
     }
-    this.setState({
-      uid: authData.user.uid,
-      owner: store.owner || authData.user.uid,
-    });
-  };
+    setUid(authData.user.uid);
+    setOwner(store.owner || authData.user.uid);
+  }, []);
 
-  logout = async () => {
+  const logout = useCallback(async () => {
     await firebase.auth().signOut();
-    this.setState({ uid: null });
-  };
+    setUid(null);
+  }, []);
 
-  render() {
-    return (
-      <main>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={(props) => (
-              <StoreMap
-                {...props}
-                stores={this.state.stores}
-                addToFavourites={this.addToFavourites}
-                isPayPalScriptLoaded={this.state.isPayPalScriptLoaded}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/list"
-            render={(props) => (
-              <StoreList
-                {...props}
-                stores={this.state.stores}
-                addToFavourites={this.addToFavourites}
-                favourites={this.state.favourites}
-                isPayPalScriptLoaded={this.state.isPayPalScriptLoaded}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/dashboard"
-            render={(props) => (
-              <Dashboard
-                {...props}
-                addStore={this.addStore}
-                updateStore={this.updateStore}
-                deleteStore={this.deleteStore}
-                loadStoresFromFile={this.loadStoresFromFile}
-                stores={this.state.stores}
-                uid={this.state.uid}
-                logout={this.logout}
-                authenticate={this.authenticate}
-                owner={this.state.owner}
-                isPayPalScriptLoaded={this.state.isPayPalScriptLoaded}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/favourites"
-            render={(props) => (
-              <Favourites
-                {...props}
-                stores={this.state.stores}
-                favourites={this.state.favourites}
-                deleteFavourite={this.deleteFavourite}
-                isPayPalScriptLoaded={this.state.isPayPalScriptLoaded}
-              />
-            )}
-          />
-          <Route component={NotFound}></Route>
-        </Switch>
-      </main>
-    );
-  }
-}
+  return (
+    <main>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={(props) => (
+            <StoreMap
+              {...props}
+              stores={stores || {}}
+              addToFavourites={addToFavourites}
+              isPayPalScriptLoaded={isPayPalScriptLoaded}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/list"
+          render={(props) => (
+            <StoreList
+              {...props}
+              stores={stores || {}}
+              addToFavourites={addToFavourites}
+              favourites={favourites}
+              isPayPalScriptLoaded={isPayPalScriptLoaded}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/dashboard"
+          render={(props) => (
+            <Dashboard
+              {...props}
+              addStore={addStore}
+              updateStore={updateStore}
+              deleteStore={deleteStore}
+              loadStoresFromFile={loadStoresFromFile}
+              stores={stores || {}}
+              uid={uid}
+              logout={logout}
+              authenticate={authenticate}
+              owner={owner}
+              isPayPalScriptLoaded={isPayPalScriptLoaded}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/favourites"
+          render={(props) => (
+            <Favourites
+              {...props}
+              stores={stores || {}}
+              favourites={favourites}
+              deleteFavourite={deleteFavourite}
+              isPayPalScriptLoaded={isPayPalScriptLoaded}
+            />
+          )}
+        />
+        <Route component={NotFound}></Route>
+      </Switch>
+    </main>
+  );
+};
 
-export default withRouter(App);
+export default App;
