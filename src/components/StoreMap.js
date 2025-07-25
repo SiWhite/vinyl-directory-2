@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import SEO from './SEO';
 import Header from "./Header";
 import FeaturedStore from "./FeaturedStore";
 import Intro from "./Intro";
@@ -122,67 +123,170 @@ class StoreMap extends React.Component {
     }
   };
 
+  // Generate SEO data based on current region
+  getSEOData = () => {
+    const { region } = this.state;
+    const storeCount = Object.keys(this.props.stores).length;
+    
+    const regionLabels = {
+      All: "New Zealand",
+      Northland: "Northland",
+      Auckland: "Auckland", 
+      CentralNorth: "Central North Island",
+      Wellington: "Wellington",
+      SouthIsland: "South Island"
+    };
+
+    const currentRegionLabel = regionLabels[region] || "New Zealand";
+    
+    if (region === "All") {
+      return {
+        title: "Vinyl Record Stores Map - New Zealand",
+        description: `Interactive map showing ${storeCount} independent vinyl record stores across New Zealand. Click on map markers to view store details, contact information, and locations.`,
+        keywords: "vinyl records map, record stores New Zealand, vinyl shops map, music stores locations, Auckland Wellington Christchurch vinyl",
+        canonical: "https://vinyldirectory.nz/"
+      };
+    } else {
+      return {
+        title: `Vinyl Record Stores Map - ${currentRegionLabel}`,
+        description: `Interactive map of vinyl record stores in ${currentRegionLabel}, New Zealand. Find independent music shops and record dealers in your area.`,
+        keywords: `vinyl records map, record stores ${currentRegionLabel}, vinyl shops ${currentRegionLabel}, music stores ${currentRegionLabel}`,
+        canonical: `https://vinyldirectory.nz/?region=${region}`
+      };
+    }
+  };
+  
+  // Generate structured data for the map
+  getStructuredData = () => {
+    const { region } = this.state;
+    const stores = this.props.stores;
+    const storeKeys = Object.keys(stores);
+    
+    return {
+      "@context": "https://schema.org",
+      "@type": "Map",
+      "name": `Vinyl Record Stores Map${region !== "All" ? ` - ${region}` : ""} - New Zealand`,
+      "description": this.getSEOData().description,
+      "url": region === "All" ? "https://vinyldirectory.nz/" : `https://vinyldirectory.nz/?region=${region}`,
+      "about": {
+        "@type": "Thing",
+        "name": "Vinyl Record Stores",
+        "description": "Independent vinyl record stores and music shops"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "VinylDirectory.nz",
+        "url": "https://vinyldirectory.nz"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": this.state.center.lat,
+        "longitude": this.state.center.lng
+      },
+      "spatialCoverage": {
+        "@type": "Place",
+        "geo": {
+          "@type": "GeoShape",
+          "box": "-47.0 166.0 -34.0 179.0"
+        },
+        "name": "New Zealand"
+      },
+      "mainEntity": storeKeys.slice(0, 10).map(key => ({ // Limit to first 10 stores to avoid huge JSON
+        "@type": "Store",
+        "name": stores[key].name,
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": `${stores[key].address1} ${stores[key].address2}`,
+          "addressLocality": stores[key].address3,
+          "addressCountry": "NZ"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": parseFloat(stores[key].lat),
+          "longitude": parseFloat(stores[key].lng)
+        },
+        "telephone": stores[key].phone,
+        "url": stores[key].url
+      }))
+    };
+  };
+
   render() {
     const stores = [];
+    const seoData = this.getSEOData();
+    const structuredData = this.getStructuredData();
+
+    // Build stores array for map
+    Object.keys(this.props.stores).forEach((key) => {
+      const obj = {
+        name: this.props.stores[key].name,
+        address1: this.props.stores[key].address1,
+        address2: this.props.stores[key].address2,
+        address3: this.props.stores[key].address3,
+        phone: this.props.stores[key].phone,
+        url: this.props.stores[key].url,
+        image: this.props.stores[key].image,
+        location: {
+          lat: parseFloat(this.props.stores[key].lat),
+          lng: parseFloat(this.props.stores[key].lng),
+        },
+      };
+      stores.push(obj);
+    });
 
     return (
-      <div className="container">
-        <Header title="Vinyl Directory" />
-        <Intro insideMap={true}/>
-      <div className="store-map">
-        {Object.keys(this.props.stores).forEach((key) => {
-          const obj = {
-            name: this.props.stores[key].name,
-            address1: this.props.stores[key].address1,
-            address2: this.props.stores[key].address2,
-            address3: this.props.stores[key].address3,
-            phone: this.props.stores[key].phone,
-            url: this.props.stores[key].url,
-            image: this.props.stores[key].image,
-            location: {
-              lat: parseFloat(this.props.stores[key].lat),
-              lng: parseFloat(this.props.stores[key].lng),
-            },
-          };
-          stores.push(obj);
-        })}
-        <LoadScript
-          googleMapsApiKey={process.env.REACT_APP_MAP_KEY}
-          libraries={["marker"]}
-          version="weekly"
-          >
-          <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            zoom={this.state.zoom}
-            center={this.state.center}
-            onLoad={(map) => this.handleOnLoad(map)}
-          >
-            <MarkerClusterer options={options}>
-              {(clusterer) =>
-                stores.map((store) => (
-                  <MarkerWithInfoWindow
-                    key={createKey(10)}
-                    clusterer={clusterer}
-                    position={store.location}
-                    name={store.name}
-                    address1={store.address1}
-                    address2={store.address2}
-                    address3={store.address3}
-                    phone={store.phone}
-                    url={store.url}
-                    image={store.image}
-                    setOpenWindow={this.setOpenWindow}
-                    isOpen={this.state.isOpen}
-                  />
-                ))
-              }
-            </MarkerClusterer>
-          </GoogleMap>
-        </LoadScript>
-      </div>
-      <Adverts />
-      <Footer />
-      </div>
+      <>
+       <SEO 
+          title={seoData.title}
+          description={seoData.description}
+          keywords={seoData.keywords}
+          canonical={seoData.canonical}
+          ogType="website"
+          structuredData={structuredData}
+        />
+
+        <div className="container">
+          <Header title="Vinyl Directory" />
+          <Intro insideMap={true}/>
+          <div className="store-map">
+            <LoadScript
+              googleMapsApiKey={process.env.REACT_APP_MAP_KEY}
+              libraries={["marker"]}
+              version="weekly"
+              >
+              <GoogleMap
+                mapContainerStyle={mapContainerStyle}
+                zoom={this.state.zoom}
+                center={this.state.center}
+                onLoad={(map) => this.handleOnLoad(map)}
+              >
+                <MarkerClusterer options={options}>
+                  {(clusterer) =>
+                    stores.map((store) => (
+                      <MarkerWithInfoWindow
+                        key={createKey(10)}
+                        clusterer={clusterer}
+                        position={store.location}
+                        name={store.name}
+                        address1={store.address1}
+                        address2={store.address2}
+                        address3={store.address3}
+                        phone={store.phone}
+                        url={store.url}
+                        image={store.image}
+                        setOpenWindow={this.setOpenWindow}
+                        isOpen={this.state.isOpen}
+                      />
+                    ))
+                  }
+                </MarkerClusterer>
+              </GoogleMap>
+            </LoadScript>
+          </div>
+          <Adverts />
+          <Footer />
+        </div>
+      </>
     );
   }
 }
