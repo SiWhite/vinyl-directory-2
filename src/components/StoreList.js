@@ -132,7 +132,7 @@ const StoreList = ({ stores = {}, addToFavourites, favourites = {} }) => {
             ))}
           </ul>
         </div>
-        <Adverts />
+        {/*<Adverts />*/}
         <Footer />
       </div>
     </>

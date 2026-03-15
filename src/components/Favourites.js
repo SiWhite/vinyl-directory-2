@@ -55,7 +55,7 @@ const Favourites = ({
           </p>
         )}
       </div>
-      <Adverts />
+      {/*<Adverts />*/}
       <Footer />
     </div>
   );

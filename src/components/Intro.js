@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 
 function Intro({ isPayPalScriptLoaded, insideMap, insideList, insideFavs }) {
   const paypalRendered = useRef(false);
+   const imgSrc = "/images/you-dig.jpg"
+  const youDigHref = "https://youdigrecords.nz/";
 
   useEffect(() => {
     if (
@@ -48,33 +50,48 @@ function Intro({ isPayPalScriptLoaded, insideMap, insideList, insideFavs }) {
 
   if (insideMap) {
     return (
-      <div className="intro-flex">
-        <div
-          className="content intro-main"
-        >
-          <h2>
-            Welcome to VinylDirectory.nz - your guide to independent kiwi vinyl
-            record digging spots!
-          </h2>
-          <p className="intro" style={{ fontSize: "1.25em" }}>
-            This handy map shows the locations and contact details of independent
-            vinyl record sellers across New Zealand. Click on a record icon on the
-            map to view details about each location. You can zoom and drag on the
-            map to refine your view, or select a region from the drop-down menu to
-            focus on that area.
-          </p>
-          <p style={{ fontSize: "1.25em" }}>
-            If you are a retailer and would like to have your listing added to the
-            directory, become a featured store, or host an advertisement with us
-            (at super low rates!), or if you have any other feedback, please email{" "}
-            <a href="mailto:simon@silentdesigns.co.nz">
-              simon@silentdesigns.co.nz
-            </a>
-            .
-          </p>
+      <>
+        <div className="intro-flex">
+          <div
+            className="content intro-main"
+          >
+            <h2>
+              Welcome to VinylDirectory.nz - your guide to independent kiwi vinyl
+              record digging spots!
+            </h2>
+            <p className="intro" style={{ fontSize: "1.25em" }}>
+              This handy map shows the locations and contact details of independent
+              vinyl record sellers across New Zealand. Click on a record icon on the
+              map to view details about each location. You can zoom and drag on the
+              map to refine your view, or select a region from the drop-down menu to
+              focus on that area.
+            </p>
+            <p style={{ fontSize: "1.25em" }}>
+              If you are a retailer and would like to have your listing added to the
+              directory, become a featured store, or host an advertisement with us
+              (at super low rates!), or if you have any other feedback, please email{" "}
+              <a href="mailto:simon@silentdesigns.co.nz">
+                simon@silentdesigns.co.nz
+              </a>
+              .
+            </p>
+          </div>
+          {paypalButton}
         </div>
-        {paypalButton}
-      </div>
+        <div className="banner">
+            <a
+              href={youDigHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src={imgSrc}
+                alt="You Dig? Records"
+                style={{ width: "100%", height: "auto", display: "block", marginBottom: "20px" }}
+              />
+            </a>
+          </div>
+      </>
     );
   }
 

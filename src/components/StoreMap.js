@@ -283,7 +283,7 @@ class StoreMap extends React.Component {
               </GoogleMap>
             </LoadScript>
           </div>
-          <Adverts />
+          {/*<Adverts />*/}
           <Footer />
         </div>
       </>
